@@ -23,7 +23,7 @@ class DatabaseModel {
 
     @Provides
     fun providePostalCodeDao(appDatabase: AppDatabase): PostcodeDao {
-        return appDatabase.postalCodeDao()
+        return appDatabase.postcodeDao()
     }
 
 

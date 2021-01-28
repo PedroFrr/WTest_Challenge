@@ -2,6 +2,9 @@
 buildscript {
     ext{
         kotlin_version = "1.4.21"
+        compileSdkVersion = 29
+        targetSdkVersion = compileSdkVersion
+        minSdkVersion = 23
 
         //App dependencies
         lifecycle_version = "2.2.0"
@@ -17,6 +20,7 @@ buildscript {
         play_services_version = '17.0.1'
         glideVersion = '4.11.0'
         leakCanaryVersion = '2.6'
+        kotlinCsvVersion = '0.15.0'
 
     }
 

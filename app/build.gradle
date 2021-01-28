@@ -7,16 +7,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+//    TODO change to 30, just a workaround to download csv file
+    compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.pedrofr.wtest"
-        minSdkVersion 19
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Required when setting minSdkVersion to 20 or lower
@@ -95,12 +95,11 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
 
-    //Apache commons && OpenCSV
-    implementation 'org.apache.commons:commons-csv:1.8'
-    implementation 'com.opencsv:opencsv:4.6'
-
     //Leak canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+
+    // kotlin-csv
+    implementation "com.github.doyaaaaaken:kotlin-csv-jvm:$rootProject.kotlinCsvVersion"
 
 
     //Test dependencies

@@ -10,12 +10,12 @@ import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.ListItemPostcodeBinding
 
 
-class PostCodeListAdapter(private val navigateToDetail: (view: View, postCodeId: Long) -> Unit) :
+class PostCodeListAdapter :
     ListAdapter<DbPostcode, PostCodeListAdapter.ViewHolder>(PostcodeListListDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, navigateToDetail)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,12 +33,11 @@ class PostCodeListAdapter(private val navigateToDetail: (view: View, postCodeId:
             }
         }
 
-        fun bind(
-            item: DbPostcode,
-            navigateToDetail: (view: View, cityId: Long) -> Unit
-        ) {
+        fun bind(item: DbPostcode) {
             with(binding) {
                 //TODO add bindings - clickListenter, name ....
+                postcode.text = "${item.postcodeNumber}-${item.postcodeExtension}" //TODO change in the future if needed to placeholder
+                postalDesignation.text = item.postalDesignation
             }
 
         }

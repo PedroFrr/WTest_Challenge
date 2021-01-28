@@ -13,9 +13,9 @@ interface PostcodeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(postcodes: List<DbPostcode>)
 
-    @Query("SELECT * FROM postcode ORDER BY name")
+    @Query("SELECT * FROM postcode ORDER BY postalDesignation, postcodeNumber LIMIT 50")
     fun fetchPostcodes(): Flow<List<DbPostcode>>
 
-    @Query("SELECT * FROM postcode WHERE name LIKE '%'") //TODO replace WHERE clause
+    @Query("SELECT * FROM postcode WHERE postalDesignation LIKE '%' || :query ORDER BY postalDesignation, postcodeNumber LIMIT 50") //TODO replace WHERE clause
     fun fetchPostcodesByQuery(query: String): Flow<List<DbPostcode>>
 }

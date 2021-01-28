@@ -20,17 +20,30 @@
 <!--        TODO add extra info-->
 
         <TextView
-            android:id="@+id/localName"
+            android:id="@+id/postcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_standard"
             android:layout_marginTop="@dimen/padding_half"
             android:layout_marginEnd="@dimen/padding_standard"
             android:layout_marginBottom="@dimen/padding_half"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textStyle="bold"
+            tools:text="3750-364" />
+
+        <TextView
+            android:id="@+id/postalDesignation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_standard"
+            android:layout_marginTop="@dimen/padding_half"
+            android:layout_marginEnd="@dimen/padding_standard"
+            android:layout_marginBottom="@dimen/padding_half"
+            app:layout_constraintStart_toEndOf="@id/postcode"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Lisbon" />
 
 

@@ -7,9 +7,7 @@ import java.util.*
 @Entity(tableName = "postcode")
 data class DbPostcode(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
-    val districtCode: String,
-    val countyCode: String,
-    val localCode: String,
-    val name: String
-    //TODO add more
+    val postalDesignation: String,
+    val postcodeNumber: String,
+    val postcodeExtension: String
 )
