@@ -5,13 +5,17 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrofr.wtest.R
+import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.FragmentPostCodeListBinding
 import com.pedrofr.wtest.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
@@ -27,10 +31,14 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
         initObservables()
     }
 
-    private fun initUi(){
+    private fun initUi() {
 
         binding.postcodeRecyclerView.apply {
             adapter = postcodesAdapter
+            adapter = postcodesAdapter.withLoadStateHeaderAndFooter(
+                header = PostcodeListLoadingAdapter { postcodesAdapter.retry() },
+                footer = PostcodeListLoadingAdapter { postcodesAdapter.retry() }
+            )
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             hasFixedSize()
@@ -45,10 +53,15 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
 
     }
 
-    private fun initObservables(){
-        postcodeListViewModel.fetchPostcodes().observe(viewLifecycleOwner) { postcodes ->
-            postcodesAdapter.submitList(postcodes)
-        }
+    private fun initObservables() {
+        //TODO see if I can change this to KTX (just have to declare the type)
+        postcodeListViewModel.fetchPostcodes()
+            .observe(viewLifecycleOwner, Observer<PagingData<DbPostcode>> {
+                lifecycleScope.launch {
+                    postcodesAdapter.submitData(it)
+                }
+            })
+
     }
 
 }

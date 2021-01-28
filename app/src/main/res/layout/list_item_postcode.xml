@@ -17,8 +17,6 @@
         android:layout_height="@dimen/list_item_with_divider_height"
         android:layout_marginStart="@dimen/padding_standard">
 
-<!--        TODO add extra info-->
-
         <TextView
             android:id="@+id/postcode"
             android:layout_width="wrap_content"

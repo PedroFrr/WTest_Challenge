@@ -7,6 +7,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.pedrofr.wtest.data.db.AppDatabase
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import java.io.File
+import java.lang.Exception
 
 class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters) {
@@ -15,22 +16,29 @@ class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameter
         val csvPath = inputData.getString("csv_path") ?: return Result.failure()
 
         val file = File(csvPath)
-        val rows: List<Map<String, String>> = csvReader().readAllWithHeader(file)
 
-        val postcodes = rows.map {
-            DbPostcode(
-                postalDesignation = it.getValue("desig_postal"),
-                postcodeExtension = it.getValue("ext_cod_postal"),
-                postcodeNumber = it.getValue("num_cod_postal")
-            )
+        val postcodes = mutableListOf<DbPostcode>()
+
+        //skipMissMatchedRow true means invalid rows are skipped and no expection is thrown
+        csvReader {
+            skipMissMatchedRow = true
+        }.open(file) {
+
+            readAllWithHeaderAsSequence().forEach { row: Map<String, String> ->
+                val postcode = DbPostcode(
+                    postalDesignation = row.getValue("desig_postal"),
+                    postcodeExtension = row.getValue("ext_cod_postal"),
+                    postcodeNumber = row.getValue("num_cod_postal")
+                )
+                postcodes.add(postcode)
+            }
         }
 
         val database = AppDatabase.getInstance(applicationContext)
         database.postcodeDao().insertAll(postcodes)
 
-
-
         return Result.success()
     }
 
 }
+

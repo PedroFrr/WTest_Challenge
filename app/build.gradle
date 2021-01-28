@@ -101,6 +101,9 @@ dependencies {
     // kotlin-csv
     implementation "com.github.doyaaaaaken:kotlin-csv-jvm:$rootProject.kotlinCsvVersion"
 
+    //Paging library
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingLibraryVersion"
+
 
     //Test dependencies
     testImplementation 'junit:junit:4.13.1'

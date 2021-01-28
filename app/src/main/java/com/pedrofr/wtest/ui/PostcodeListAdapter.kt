@@ -1,21 +1,19 @@
 package com.pedrofr.wtest.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.ListItemPostcodeBinding
 
 
 class PostCodeListAdapter :
-    ListAdapter<DbPostcode, PostCodeListAdapter.ViewHolder>(PostcodeListListDiffCallBack()) {
+    PagingDataAdapter<DbPostcode, PostCodeListAdapter.ViewHolder>(PostcodeListListDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+        getItem(position)?.let { holder.bind(it) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

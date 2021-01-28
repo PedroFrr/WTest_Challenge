@@ -1,6 +1,8 @@
 package com.pedrofr.wtest.data.db
 
+import android.app.DownloadManager
 import android.content.Context
+import android.content.IntentFilter
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,6 +11,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbPostcode
+import com.pedrofr.wtest.services.DownloadPostcodeCsvReceiver
 import com.pedrofr.wtest.util.DATABASE_NAME
 import com.pedrofr.wtest.workers.ClearLocalStorageWorker
 import com.pedrofr.wtest.workers.DownloadPostcodeCsvWorker
@@ -38,6 +41,7 @@ abstract class AppDatabase : RoomDatabase() {
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
+
                             //TODO set constraints network, storage so the operation succeeds - test if no network it will eventually download. Show error
                             val downloadPostcodeCsvWorker = OneTimeWorkRequestBuilder<DownloadPostcodeCsvWorker>().build()
                             val postcodeDatabaseWorker = OneTimeWorkRequestBuilder<PostcodeDatabaseWorker>().build()
@@ -53,5 +57,11 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                 .build()
         }
+
+        private fun onPostcodeCsvDownload(){
+
+        }
     }
+
+
 }

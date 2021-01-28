@@ -1,19 +1,20 @@
 package com.pedrofr.wtest.workers
 
+import android.app.DownloadManager
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.pedrofr.wtest.util.POSTCODE_BASE_URL
 import java.io.File
-import java.io.FileOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 //TODO see if I should change this to a normal worker
 class DownloadPostcodeCsvWorker(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters) {
+
+    private val isDownloaded = false
 
     companion object {
         private const val TAG = "Worker"
@@ -23,44 +24,21 @@ class DownloadPostcodeCsvWorker(context: Context, workerParameters: WorkerParame
     override fun doWork(): Result {
         try {
             Log.d(TAG, "PostcodeDatabaseWorker")
-            val csvUrl = URL(POSTCODE_BASE_URL) //TODO check if we should instead pass it in as input_data
 
-            val connection = csvUrl.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
 
             val csvPath = "${System.currentTimeMillis()}.csv"
-            val inputStream = connection.inputStream
             val file = File(applicationContext.externalMediaDirs.first(), csvPath)
 
-            val outputStream = FileOutputStream(file)
-            outputStream.use { output ->
-                val buffer = ByteArray(4*1024) //TODO change
-                var byteCount = inputStream.read(buffer)
+            val request = DownloadManager.Request(Uri.parse(POSTCODE_BASE_URL))
+                .setTitle("Postcode Csv download")
+                .setDescription("Downloading")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                .setDestinationUri(Uri.fromFile(file))
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(false)
 
-                while(byteCount > 0) {
-                    output.write(buffer, 0, byteCount)
-                    byteCount = inputStream.read(buffer)
-                }
-
-                output.flush()
-            }
-
-
-//            val bufferedReader = BufferedReader(InputStreamReader(csvUrl.openStream()))
-//            val reader = CSVReader(bufferedReader)
-//
-//            bufferedReader.readLines().forEach {
-//                val items = it.split(",")
-//                Log.d(TAG, items.toString())
-//
-//            }
-
-
-//            val csvParser = CsvP(reader, CSVFormat.DEFAULT
-//                .withFirstRecordAsHeader()
-//                .withIgnoreHeaderCase()
-//                .withTrim())
+            val downloadManager = applicationContext.getSystemService(DownloadManager::class.java)
+            val downloadId = downloadManager?.enqueue(request)
 
             val output = workDataOf("csv_path" to file.absolutePath) //saves the csvPath on the output so we can use it on the next chained worker
             return Result.success(output)
@@ -71,5 +49,7 @@ class DownloadPostcodeCsvWorker(context: Context, workerParameters: WorkerParame
 
 
     }
+
+
 
 }

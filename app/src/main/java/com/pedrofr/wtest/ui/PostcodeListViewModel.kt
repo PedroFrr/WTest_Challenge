@@ -2,6 +2,7 @@ package com.pedrofr.wtest.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.domain.repository.Repository
 import kotlinx.coroutines.Job
@@ -15,7 +16,7 @@ class PostcodeListViewModel @ViewModelInject constructor(
 
     private val debouncePeriod: Long = 250
     private var searchJob: Job? = null
-    private var _searchPostcodeLiveData: LiveData<List<DbPostcode>>
+    private var _searchPostcodeLiveData: LiveData<PagingData<DbPostcode>>
     fun fetchPostcodes() = _searchPostcodeLiveData
     private val _searchFieldTextLiveData = MutableLiveData("")
 
@@ -36,8 +37,8 @@ class PostcodeListViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun fetchPostcode(query: String): LiveData<List<DbPostcode>> {
-        val liveData = MutableLiveData<List<DbPostcode>>()
+    private fun fetchPostcode(query: String): LiveData<PagingData<DbPostcode>> {
+        val liveData = MutableLiveData<PagingData<DbPostcode>>()
         viewModelScope.launch {
             if (query.isBlank()) {
                 repository.fetchPostcodes()

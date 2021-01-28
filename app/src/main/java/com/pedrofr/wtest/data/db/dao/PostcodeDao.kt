@@ -1,5 +1,6 @@
 package com.pedrofr.wtest.data.db.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,9 +14,9 @@ interface PostcodeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(postcodes: List<DbPostcode>)
 
-    @Query("SELECT * FROM postcode ORDER BY postalDesignation, postcodeNumber LIMIT 50")
-    fun fetchPostcodes(): Flow<List<DbPostcode>>
+    @Query("SELECT * FROM postcode ORDER BY postalDesignation, postcodeNumber")
+    fun fetchPostcodes(): PagingSource<Int, DbPostcode>
 
-    @Query("SELECT * FROM postcode WHERE postalDesignation LIKE '%' || :query ORDER BY postalDesignation, postcodeNumber LIMIT 50") //TODO replace WHERE clause
-    fun fetchPostcodesByQuery(query: String): Flow<List<DbPostcode>>
+    @Query("SELECT * FROM postcode WHERE postalDesignation LIKE  REPLACE(:query, ' ', '%') ORDER BY postalDesignation, postcodeNumber ") //TODO replace WHERE clause
+    fun fetchPostcodesByQuery(query: String): PagingSource<Int, DbPostcode>
 }

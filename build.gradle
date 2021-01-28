@@ -8,7 +8,7 @@ buildscript {
 
         //App dependencies
         lifecycle_version = "2.2.0"
-        roomVersion = '2.2.6'
+        roomVersion = '2.3.0-alpha04'
         hiltVersion = '2.30.1-alpha'
         hiltViewModelVersion = '1.0.0-alpha02'
         moshiVersion = "1.9.2"
@@ -21,6 +21,7 @@ buildscript {
         glideVersion = '4.11.0'
         leakCanaryVersion = '2.6'
         kotlinCsvVersion = '0.15.0'
+        pagingLibraryVersion = '3.0.0-alpha13'
 
     }
 
