@@ -2,6 +2,7 @@ package com.pedrofr.wtest.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,7 +40,11 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
                 header = PostcodeListLoadingAdapter { postcodesAdapter.retry() },
                 footer = PostcodeListLoadingAdapter { postcodesAdapter.retry() }
             )
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false).apply {
+                stackFromEnd = true
+            }
+
+
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             hasFixedSize()
         }

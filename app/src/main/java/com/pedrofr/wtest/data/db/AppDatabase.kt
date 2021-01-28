@@ -41,7 +41,6 @@ abstract class AppDatabase : RoomDatabase() {
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-
                             //TODO set constraints network, storage so the operation succeeds - test if no network it will eventually download. Show error
                             val downloadPostcodeCsvWorker = OneTimeWorkRequestBuilder<DownloadPostcodeCsvWorker>().build()
                             val postcodeDatabaseWorker = OneTimeWorkRequestBuilder<PostcodeDatabaseWorker>().build()
@@ -57,11 +56,6 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                 .build()
         }
-
-        private fun onPostcodeCsvDownload(){
-
-        }
     }
-
 
 }
