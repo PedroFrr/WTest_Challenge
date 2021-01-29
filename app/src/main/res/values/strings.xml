@@ -15,4 +15,5 @@
     <string name="letters_hifen_hint">AAAA-AA...</string>
     <string name="date_hint">Domingo, 4 de Novembro de 2018</string>
     <string name="empty_error">Field must not be empty</string>
+    <string name="email_invalid">Email is not valid</string>
 </resources>

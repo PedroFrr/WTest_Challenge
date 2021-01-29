@@ -24,6 +24,8 @@ class FormFragment : Fragment(R.layout.fragment_form) {
     //TODO change all this strings to resources to support internationalization
     private fun initUi(){
 
+        setDefaultEmptyError()
+
         binding.freeTextEditText.doOnTextChanged { text, _, _, _ ->
             text ?: return@doOnTextChanged
             if (text.isNotBlank()) {
@@ -39,7 +41,7 @@ class FormFragment : Fragment(R.layout.fragment_form) {
             if (text.toString().isEmailValid()) {
                 binding.emailInputLayout.error = null
             }else{
-                binding.emailInputLayout.error = "Email is not valid"
+                binding.emailInputLayout.error = getString(R.string.email_invalid)
             }
 
         }
@@ -51,6 +53,15 @@ class FormFragment : Fragment(R.layout.fragment_form) {
             }else{
                 binding.numbersInputLayout.error = getString(R.string.empty_error)
             }
+
+        }
+    }
+
+    private fun setDefaultEmptyError(){
+        binding.apply {
+            freeTextInputLayout.error = getString(R.string.empty_error)
+            emailInputLayout.error = getString(R.string.empty_error)
+            numbersInputLayout.error = getString(R.string.empty_error)
 
         }
     }

@@ -18,5 +18,15 @@ interface PostcodeDao {
     fun fetchPostcodes(): PagingSource<Int, DbPostcode>
 
     @Query("SELECT * FROM postcode WHERE postalDesignation LIKE  REPLACE(:query, ' ', '%') ORDER BY postalDesignation, postcodeNumber ") //TODO replace WHERE clause
+    fun search(query: String): PagingSource<Int, DbPostcode>
+
+    @Query(
+        """
+        SELECT *
+        FROM postcode 
+        JOIN postcodes_fts ON postcode.id = postcodes_fts.id
+        WHERE postcodes_fts MATCH :query
+        """
+    )
     fun fetchPostcodesByQuery(query: String): PagingSource<Int, DbPostcode>
 }

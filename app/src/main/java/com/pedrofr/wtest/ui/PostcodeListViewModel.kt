@@ -23,8 +23,8 @@ class PostcodeListViewModel @ViewModelInject constructor(
     init {
 
         //every time the search field changes we re-execute the query
-        _searchPostcodeLiveData = _searchFieldTextLiveData.switchMap {
-            fetchPostcode(it)
+        _searchPostcodeLiveData = _searchFieldTextLiveData.switchMap {query ->
+            fetchPostcode("*$query*")
         }
 
     }

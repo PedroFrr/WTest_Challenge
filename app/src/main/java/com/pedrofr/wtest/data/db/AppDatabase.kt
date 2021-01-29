@@ -13,6 +13,7 @@ import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
+import com.pedrofr.wtest.data.db.entities.DbPostcodeFTS
 import com.pedrofr.wtest.services.DownloadPostcodeCsvReceiver
 import com.pedrofr.wtest.util.DATABASE_NAME
 import com.pedrofr.wtest.workers.ClearLocalStorageWorker
@@ -22,7 +23,7 @@ import com.pedrofr.wtest.workers.PostcodeDatabaseWorker
 /**
  * SQLite Database for storing the logs.
  */
-@Database(entities = [DbPostcode::class, DbArticle::class], version = 1, exportSchema = false)
+@Database(entities = [DbPostcode::class, DbArticle::class, DbPostcodeFTS::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun postcodeDao(): PostcodeDao
     abstract fun articleDao(): ArticleDao
