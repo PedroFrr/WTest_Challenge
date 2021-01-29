@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/postcodeListFragment"
+        android:icon="@drawable/ic_baseline_home_work_24"
+        android:title="@string/title_postcode" />
+    <item
+        android:id="@+id/articleListFragment"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="@string/title_article" />
+</menu>

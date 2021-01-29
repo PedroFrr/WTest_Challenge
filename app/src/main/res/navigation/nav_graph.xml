@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/articleListFragment">
+    app:startDestination="@id/postcodeListFragment">
     <fragment
         android:id="@+id/articleListFragment"
         android:name="com.pedrofr.wtest.ui.ArticleListFragment"
@@ -22,4 +22,9 @@
             android:name="articleId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/postcodeListFragment"
+        android:name="com.pedrofr.wtest.ui.PostcodeListFragment"
+        android:label="fragment_post_code_list"
+        tools:layout="@layout/fragment_post_code_list" />
 </navigation>
