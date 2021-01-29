@@ -47,6 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:ellipsize="end"
             android:maxLines="3"
+            android:justificationMode="inter_word"
             tools:text="Sumario sumario sumario" />
 
 

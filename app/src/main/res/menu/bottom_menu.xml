@@ -9,4 +9,9 @@
         android:id="@+id/articleListFragment"
         android:icon="@drawable/ic_baseline_article_24"
         android:title="@string/title_article" />
+
+    <item
+        android:id="@+id/formFragment"
+        android:icon="@drawable/ic_baseline_dynamic_form_24"
+        android:title="@string/title_form" />
 </menu>

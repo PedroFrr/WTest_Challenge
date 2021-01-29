@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.pedrofr.wtest.R
+import java.util.regex.Pattern
 
 fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     view?.let { activity?.toast(message, length) }
@@ -43,6 +44,20 @@ fun ImageView.loadImage(imageUrl: String) {
         .dontAnimate()
         .into(this)
 }
+
+/**
+ * Email validator using Regex
+ */
+fun String.isEmailValid() =
+    Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    ).matcher(this).matches()
 
 
 
