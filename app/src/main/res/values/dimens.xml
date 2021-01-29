@@ -8,5 +8,6 @@
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="detail_backdrop_height">200dp</dimen>
+    <dimen name="article_title_text_size">16dp</dimen>
 
 </resources>

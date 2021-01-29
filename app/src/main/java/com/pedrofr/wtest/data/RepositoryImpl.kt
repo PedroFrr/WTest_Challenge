@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.pedrofr.wtest.core.Failure
 import com.pedrofr.wtest.core.Result
 import com.pedrofr.wtest.core.Success
+import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
@@ -24,6 +25,7 @@ class RepositoryImpl @Inject constructor(
     private val apiMapper: ApiMapper,
     private val articleClient: ArticleClient,
     private val postcodeDao: PostcodeDao,
+    private val articleDao: ArticleDao
 ) : Repository {
     override fun fetchPostcodes(): Flow<PagingData<DbPostcode>> {
         return Pager(
@@ -52,9 +54,9 @@ class RepositoryImpl @Inject constructor(
         val results = articleClient.fetchArticles()
 
         return if(results is Success){
-            val articles = results.data.articles.map {
-                apiMapper.mapApiArticleToDb(it)
-            }
+            val articles = results.data.articles.map { apiMapper.mapApiArticleToDb(it) }
+
+            articleDao.insertAll(articles)
 
             Success(articles)
 
@@ -62,8 +64,10 @@ class RepositoryImpl @Inject constructor(
             Failure((results as Failure).error) //TODO refactor
         }
 
+
     }
-    //TODO add calls. save first on db ...
+
+    override suspend fun fetchArticle(articleId: String): DbArticle = articleDao.fetchArticle(articleId)
 
 }
 

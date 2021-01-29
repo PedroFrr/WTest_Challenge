@@ -13,4 +13,6 @@ interface Repository {
     fun fetchPostcodesByQuery(query: String): Flow<PagingData<DbPostcode>>
 
     suspend fun fetchArticles(): Result<List<DbArticle>>
+
+    suspend fun fetchArticle(articleId: String): DbArticle
 }
