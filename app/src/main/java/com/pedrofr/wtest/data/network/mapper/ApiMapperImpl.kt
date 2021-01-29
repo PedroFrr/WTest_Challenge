@@ -10,9 +10,9 @@ class ApiMapperImpl @Inject constructor() : ApiMapper {
             id = apiArticle.id,
             title = apiArticle.title,
             author = apiArticle.author,
-            summary = apiArticle.summary,
+            summary = apiArticle.summary ?: "",
             body = apiArticle.body,
-            hero = apiArticle.hero,
+            hero = apiArticle.hero ?: "",
             publishedAt = apiArticle.publishedAt,
         )
     }

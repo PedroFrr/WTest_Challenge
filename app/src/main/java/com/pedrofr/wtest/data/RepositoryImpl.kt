@@ -56,7 +56,7 @@ class RepositoryImpl @Inject constructor(
         return if(results is Success){
             val articles = results.data.articles.map { apiMapper.mapApiArticleToDb(it) }
 
-            articleDao.insertAll(articles)
+            articleDao.updateArticles(articles)
 
             Success(articles)
 
