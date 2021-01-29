@@ -12,6 +12,6 @@ data class ArticleResponse(
     @Json(name = "hero") val hero: String,
     @Json(name = "published-at") val publishedAt: String,
     @Json(name = "summary") val summary: String,
-    @Json(name = "limit") val limit: String,
-    @Json(name = "page") val page: String,
+    @Json(name = "limit") val limit: String?,
+    @Json(name = "page") val page: String?,
 )

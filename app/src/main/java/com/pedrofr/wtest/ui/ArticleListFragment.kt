@@ -1,58 +1,31 @@
 package com.pedrofr.wtest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrofr.wtest.R
+import com.pedrofr.wtest.core.Failure
+import com.pedrofr.wtest.core.Loading
+import com.pedrofr.wtest.core.Result
+import com.pedrofr.wtest.core.Success
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.FragmentArticleListBinding
+import com.pedrofr.wtest.util.gone
 import com.pedrofr.wtest.util.viewBinding
+import com.pedrofr.wtest.util.visible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArticleListFragment : Fragment(R.layout.fragment_article_list) {
 
     private val binding by viewBinding(FragmentArticleListBinding::bind)
-    private val articleAdapter by lazy { ArticleListAdapter(::navigateToArticleDetail)}
-
-    private val articles = listOf<DbArticle>(
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-        DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),DbArticle(
-            title = "Título",
-            author = "Autor",
-            summary = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,"
-        ),
-
-    )
+    private val articleAdapter by lazy { ArticleListAdapter(::navigateToArticleDetail) }
+    private val articleListViewModel by viewModels<ArticleListViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,7 +34,7 @@ class ArticleListFragment : Fragment(R.layout.fragment_article_list) {
         initObservables()
     }
 
-    private fun initUi(){
+    private fun initUi() {
         binding.articleRecyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -70,14 +43,43 @@ class ArticleListFragment : Fragment(R.layout.fragment_article_list) {
             hasFixedSize()
         }
 
-        articleAdapter.submitList(articles)
-    }
-
-    private fun initObservables(){
 
     }
 
-    private fun navigateToArticleDetail(view: View, articleId: String){
+    private fun initObservables() {
+        articleListViewModel.fetchArticles()
+            .observe(viewLifecycleOwner, Observer<Result<List<DbArticle>>> { result ->
+
+            when(result){
+                is Success -> {
+                    binding.loadingProgressBar.gone()
+                    binding.errorGroup.gone()
+                    binding.articleRecyclerView.visible()
+
+                    articleAdapter.submitList(result.data)
+                }
+                is Failure -> {
+                    binding.loadingProgressBar.gone()
+                    binding.errorGroup.visible()
+                    binding.articleRecyclerView.gone()
+
+                    //TODO add error message
+                }
+                Loading -> {
+                    binding.loadingProgressBar.visible()
+                    binding.errorGroup.gone()
+                    binding.articleRecyclerView.gone()
+                }
+            }
+
+
+            })
+
+
+
+    }
+
+    private fun navigateToArticleDetail(view: View, articleId: String) {
         val direction = ArticleListFragmentDirections.articleListToDetail(articleId)
         view.findNavController().navigate(direction)
     }
