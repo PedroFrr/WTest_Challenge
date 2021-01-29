@@ -3,7 +3,11 @@ package com.pedrofr.wtest.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.pedrofr.wtest.core.Failure
+import com.pedrofr.wtest.core.Result
+import com.pedrofr.wtest.core.Success
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
+import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.data.network.client.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
@@ -44,6 +48,21 @@ class RepositoryImpl @Inject constructor(
         ).flow
     }
 
+    override suspend fun fetchArticles(): Result<List<DbArticle>> {
+        val results = articleClient.fetchArticles()
+
+        return if(results is Success){
+            val articles = results.data.articles.map {
+                apiMapper.mapApiArticleToDb(it)
+            }
+
+            Success(articles)
+
+        }else {
+            Failure((results as Failure).error) //TODO refactor
+        }
+
+    }
     //TODO add calls. save first on db ...
 
 }

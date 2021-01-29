@@ -10,5 +10,8 @@ data class DbArticle(
     val title: String,
     val author: String,
     val summary: String,
+    val body: String,
+    val hero: String,
+    val publishedAt: String,
 
     )

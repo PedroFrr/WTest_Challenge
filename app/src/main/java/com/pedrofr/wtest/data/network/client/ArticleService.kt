@@ -1,7 +1,11 @@
 package com.pedrofr.wtest.data.network.client
 
+import com.pedrofr.wtest.data.network.response.GetArticlesResponse
+import retrofit2.http.GET
+
 interface ArticleService {
 
-    //TODO replace with @GET calls for the given endpoints
+    @GET("articles")
+    suspend fun fetchArticles(): GetArticlesResponse
 
 }
