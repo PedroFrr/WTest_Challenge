@@ -1,0 +1,14 @@
+package com.pedrofr.wtest.data.db.entities
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.*
+
+@Entity(tableName = "article")
+data class DbArticle(
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    val title: String,
+    val author: String,
+    val summary: String,
+
+    )

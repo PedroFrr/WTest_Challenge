@@ -2,6 +2,7 @@ package com.pedrofr.wtest.di
 
 import android.content.Context
 import com.pedrofr.wtest.data.db.AppDatabase
+import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,9 @@ class DatabaseModel {
         return appDatabase.postcodeDao()
     }
 
-
-
+    @Provides
+    fun provideArticleDao(appDatabase: AppDatabase): ArticleDao {
+        return appDatabase.articleDao()
+    }
 
 }
