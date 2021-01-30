@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
 import com.pedrofr.wtest.data.db.dao.ArticleDao
+import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.network.client.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import com.pedrofr.wtest.data.network.response.ArticleResponse
@@ -16,9 +17,9 @@ class ArticlePagingSource(
     private val articleDao: ArticleDao,
     private val apiMapper: ApiMapper
 ) :
-    PagingSource<Int, ArticleResponse>() {
+    PagingSource<Int, DbArticle>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DbArticle> {
         try {
 
             // Start refresh at page 1 if undefined.
@@ -30,10 +31,10 @@ class ArticlePagingSource(
                 nextPageNumber + 1
             }
 
-            val articles = response.articles
+            val articles = response.articles.map { apiMapper.mapApiArticleToDb(it) }
 
             //TODO right now this is a hack. I should be using RemoteMediator but I'm not figuring out a bug
-            articleDao.insertAllArticles(articles = articles.map { apiMapper.mapApiArticleToDb(it) })
+            articleDao.insertAllArticles(articles = articles)
 
             return LoadResult.Page(
                 data = articles,
@@ -48,7 +49,7 @@ class ArticlePagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ArticleResponse>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, DbArticle>): Int? {
         return state.anchorPosition
     }
 

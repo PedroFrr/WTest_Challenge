@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/articleCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@color/colorWhiteCard"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorWhiteCard"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_standard"
+        android:layout_marginStart="@dimen/padding_standard">
+
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_half"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/ArticleTitle"
+            tools:text="Título" />
+
+        <!--TODO change this style-->
+        <TextView
+            android:id="@+id/publishedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_half"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/ArticleTitle"
+            android:text="This is feature 5 published"
+            tools:text="1 de Outubro de 2018" />
+
+        <TextView
+            android:id="@+id/articleAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_half"
+            app:layout_constraintTop_toBottomOf="@id/articleTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            tools:text="Autor" />
+
+        <TextView
+            android:id="@+id/articleSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_half"
+            app:layout_constraintTop_toBottomOf="@id/articleAuthor"
+            app:layout_constraintStart_toStartOf="parent"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:justificationMode="inter_word"
+            tools:text="Sumario sumario sumario" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

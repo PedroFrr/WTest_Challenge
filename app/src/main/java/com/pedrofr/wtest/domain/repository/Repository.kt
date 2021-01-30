@@ -17,5 +17,5 @@ interface Repository {
 
     suspend fun fetchArticle(articleId: String): DbArticle
 
-    fun fetchArticlesPaginated(): Flow<PagingData<ArticleResponse>>
+    fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>>
 }

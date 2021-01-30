@@ -1,19 +1,18 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.featureui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.wtest.data.db.entities.DbArticle
-import com.pedrofr.wtest.data.network.response.ArticleResponse
 import com.pedrofr.wtest.databinding.ListItemArticleBinding
+import com.pedrofr.wtest.ui.ArticleListFragmentDirections
 
 
 class ArticlesListPaginatedAdapter:
-    PagingDataAdapter<ArticleResponse, ArticlesListPaginatedAdapter.ViewHolder>(ArticlesPaginatedListListDiffCallBack()) {
+    PagingDataAdapter<DbArticle, ArticlesListPaginatedAdapter.ViewHolder>(ArticlesPaginatedListListDiffCallBack()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
@@ -34,7 +33,7 @@ class ArticlesListPaginatedAdapter:
             }
         }
 
-        fun bind(item: ArticleResponse) {
+        fun bind(item: DbArticle) {
             with(binding) {
                 articleTitle.text = item.title
                 articleAuthor.text = item.author
@@ -50,10 +49,10 @@ class ArticlesListPaginatedAdapter:
     }
 }
 
-private class ArticlesPaginatedListListDiffCallBack : DiffUtil.ItemCallback<ArticleResponse>() {
-    override fun areContentsTheSame(oldItem: ArticleResponse, newItem: ArticleResponse): Boolean =
+private class ArticlesPaginatedListListDiffCallBack : DiffUtil.ItemCallback<DbArticle>() {
+    override fun areContentsTheSame(oldItem: DbArticle, newItem: DbArticle): Boolean =
         oldItem.id == newItem.id
 
-    override fun areItemsTheSame(oldItem: ArticleResponse, newItem: ArticleResponse): Boolean =
+    override fun areItemsTheSame(oldItem: DbArticle, newItem: DbArticle): Boolean =
         oldItem == newItem
 }

@@ -22,7 +22,7 @@ class ArticleListViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     //TODO revise
-    fun fetchArticlesPaginated(): Flow<PagingData<ArticleResponse>> {
+    fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>> {
         return repository.fetchArticlesPaginated().cachedIn(viewModelScope)
     }
 

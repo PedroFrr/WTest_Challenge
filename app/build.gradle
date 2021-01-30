@@ -9,7 +9,7 @@ plugins {
 android {
 //    TODO change to 30, just a workaround to download csv file
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.pedrofr.wtest"
@@ -39,6 +39,39 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+
+    flavorDimensions 'default'
+    productFlavors {
+
+        Feature3{
+            applicationIdSuffix ".feature3"
+            dimension 'default'
+        }
+
+        Feature5{
+            applicationIdSuffix ".feature5"
+            dimension 'default'
+        }
+
+    }
+    sourceSets {
+        Feature5 {
+            res {
+                srcDirs 'src\\Feature5\\res'
+            }
+            java {
+                srcDirs 'src\\Feature5\\java'
+            }
+        }
+        Feature3 {
+            res {
+                srcDirs 'src\\Feature3\\res'
+            }
+            java {
+                srcDirs 'src\\Feature3\\java'
+            }
+        }
     }
 }
 

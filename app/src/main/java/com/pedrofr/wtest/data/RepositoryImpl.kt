@@ -74,7 +74,7 @@ class RepositoryImpl @Inject constructor(
     override suspend fun fetchArticle(articleId: String): DbArticle =
         articleDao.fetchArticle(articleId)
 
-    override fun fetchArticlesPaginated(): Flow<PagingData<ArticleResponse>> {
+    override fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>> {
 
         return Pager(
             config = PagingConfig(

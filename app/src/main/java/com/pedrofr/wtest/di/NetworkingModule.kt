@@ -2,8 +2,7 @@ package com.pedrofr.wtest.di
 
 import com.pedrofr.wtest.data.network.client.ArticleClient
 import com.pedrofr.wtest.data.network.client.ArticleService
-import com.pedrofr.wtest.data.network.mapper.ApiMapper
-import com.pedrofr.wtest.util.ARTICLES_BASE_URL
+import com.pedrofr.wtest.featureutil.ARTICLES_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -100,9 +100,43 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/optionInputLayout"
+        style="@style/Form.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateInputLayout"
+        android:hint="@string/option_hint">
 
+        <EditText
+            android:id="@+id/optionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"/>
 
-<!--    TODO allow to add postal code. If the postcode exists on the DB then it is valid -->
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/postcodeInputLayout"
+        style="@style/Form.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/optionInputLayout"
+        android:hint="@string/postcode_hint">
+
+        <EditText
+            android:id="@+id/postcodeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 

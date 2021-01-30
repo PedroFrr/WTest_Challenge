@@ -63,10 +63,6 @@ fun String.isEmailValid() =
                 ")+"
     ).matcher(this).matches()
 
-//fun String.isDateValid() =
-//    Pattern.compile(
-//        "[0-9]{1,2}(/)[0-9]{1,2}(/)[0-9]{4}"
-//    ).matcher(this).matches()
 
 fun String.isDateValid(): Boolean {
     val regexCondition = Pattern.compile(
@@ -88,26 +84,6 @@ fun String.isDateValid(): Boolean {
     return regexCondition && futureDateCondition
 
 }
-
-//TODO improve this regex
-fun String.isHifenAndCharactersValid(): Boolean {
-    val rx1 =  Pattern.compile("[A-Z]{6}(-)[A-Z]")
-    val rx2 =  Pattern.compile("[A-Z]{5}(-)[A-Z]{1,2}")
-    val rx3 =  Pattern.compile("[A-Z]{4}(-)[A-Z]{1,3}")
-    val rx4=  Pattern.compile("[A-Z]{3}(-)[A-Z]{1,4}")
-    val rx5=  Pattern.compile("[A-Z]{2}(-)[A-Z]{1,5}")
-    val rx6=  Pattern.compile("[A-Z](-)[A-Z]{1,6}")
-
-    return rx1.matcher(this).matches() ||
-            rx2.matcher(this).matches() ||
-            rx3.matcher(this).matches() ||
-            rx4.matcher(this).matches() ||
-            rx5.matcher(this).matches() ||
-            rx6.matcher(this).matches()
-
-}
-
-
 
 
 

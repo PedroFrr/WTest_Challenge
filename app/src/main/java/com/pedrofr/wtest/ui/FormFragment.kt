@@ -6,10 +6,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.databinding.FragmentFormBinding
-import com.pedrofr.wtest.util.isDateValid
-import com.pedrofr.wtest.util.isEmailValid
-import com.pedrofr.wtest.util.isHifenAndCharactersValid
-import com.pedrofr.wtest.util.viewBinding
+import com.pedrofr.wtest.util.*
+import java.util.regex.Pattern
 
 
 class FormFragment : Fragment(R.layout.fragment_form) {
@@ -72,6 +70,26 @@ class FormFragment : Fragment(R.layout.fragment_form) {
                 binding.dateInputLayout.error = getString(R.string.date_error)
             }
         }
+
+        binding.optionEditText.doOnTextChanged { text, _, _, _ ->
+            text ?: return@doOnTextChanged
+            if (text.toString().isValidOption()) {
+                binding.optionInputLayout.error = null
+            }else{
+                binding.optionInputLayout.error = getString(R.string.options_error)
+            }
+        }
+
+        //TODO validate postcode
+        binding.postcodeEditText.doOnTextChanged { text, _, _, _ ->
+            text ?: return@doOnTextChanged
+            if (text.toString().isValidOption()) {
+                binding.postcodeInputLayout.error = null
+            }else{
+                binding.postcodeInputLayout.error = getString(R.string.options_error)
+            }
+        }
+
     }
 
     private fun setDefaultEmptyError(){
@@ -81,9 +99,35 @@ class FormFragment : Fragment(R.layout.fragment_form) {
             numbersInputLayout.error = getString(R.string.empty_error)
             dateInputLayout.error = getString(R.string.empty_error)
             lettersAndNumbersInputLayout.error = getString(R.string.empty_error)
-
+            optionInputLayout.error = getString(R.string.empty_error)
+            postcodeInputLayout.error = getString(R.string.empty_error)
         }
     }
+
+    //TODO improve this regex
+    private fun String.isHifenAndCharactersValid(): Boolean {
+        val rx1 = Pattern.compile("[A-Z]{6}(-)[A-Z]")
+        val rx2 = Pattern.compile("[A-Z]{5}(-)[A-Z]{1,2}")
+        val rx3 = Pattern.compile("[A-Z]{4}(-)[A-Z]{1,3}")
+        val rx4 = Pattern.compile("[A-Z]{3}(-)[A-Z]{1,4}")
+        val rx5 = Pattern.compile("[A-Z]{2}(-)[A-Z]{1,5}")
+        val rx6 = Pattern.compile("[A-Z](-)[A-Z]{1,6}")
+
+        return rx1.matcher(this).matches() ||
+                rx2.matcher(this).matches() ||
+                rx3.matcher(this).matches() ||
+                rx4.matcher(this).matches() ||
+                rx5.matcher(this).matches() ||
+                rx6.matcher(this).matches()
+
+    }
+
+    private fun String.isValidOption() =
+        this == "Mau"
+                || this == "Satisfatório"
+                || this == "Bom"
+                || this == "Muito Bom"
+                || this == "Excelente"
 
 
 }
