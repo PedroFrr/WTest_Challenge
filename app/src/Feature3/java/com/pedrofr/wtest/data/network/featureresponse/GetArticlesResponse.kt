@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.data.network.response
+package com.pedrofr.wtest.data.network.featureresponse
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

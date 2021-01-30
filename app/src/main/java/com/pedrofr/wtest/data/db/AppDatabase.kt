@@ -1,8 +1,6 @@
 package com.pedrofr.wtest.data.db
 
-import android.app.DownloadManager
 import android.content.Context
-import android.content.IntentFilter
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -14,7 +12,6 @@ import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.data.db.entities.DbPostcodeFTS
-import com.pedrofr.wtest.services.DownloadPostcodeCsvReceiver
 import com.pedrofr.wtest.util.DATABASE_NAME
 import com.pedrofr.wtest.workers.ClearLocalStorageWorker
 import com.pedrofr.wtest.workers.DownloadPostcodeCsvWorker

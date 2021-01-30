@@ -5,7 +5,6 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.bumptech.glide.load.HttpException
-import com.pedrofr.wtest.data.db.AppDatabase
 import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.network.client.ArticleClient
@@ -22,14 +21,17 @@ class ArticleRemoteMediator(
 ) : RemoteMediator<Int, DbArticle>() {
     override suspend fun load(loadType: LoadType, state: PagingState<Int, DbArticle>): MediatorResult {
         return try {
-            val response = articleClient.fetchArticlesPaginated(pageNumber, NUMBER_ARTICLES_PAGE) //TODO change
+//            val response = articleClient.fetchArticlesPaginated(pageNumber, NUMBER_ARTICLES_PAGE) //TODO change
+//
+//            val articles = response.articles.map { apiMapper.mapApiArticleToDb(it) }
+//
+//            articleDao.insertAllArticles(articles = articles)
+//
+//            MediatorResult.Success(endOfPaginationReached = response.count < NUMBER_ARTICLES_PAGE)
 
-            val articles = response.articles.map { apiMapper.mapApiArticleToDb(it) }
+            //TODO
 
-            articleDao.insertAllArticles(articles = articles)
-
-            MediatorResult.Success(endOfPaginationReached = response.count < NUMBER_ARTICLES_PAGE)
-
+            MediatorResult.Success(endOfPaginationReached = true)
         } catch (exception: IOException) {
             MediatorResult.Error(exception)
         } catch (exception: HttpException) {

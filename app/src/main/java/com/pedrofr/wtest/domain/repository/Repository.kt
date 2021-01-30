@@ -4,7 +4,6 @@ import androidx.paging.PagingData
 import com.pedrofr.wtest.core.Result
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
-import com.pedrofr.wtest.data.network.response.ArticleResponse
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

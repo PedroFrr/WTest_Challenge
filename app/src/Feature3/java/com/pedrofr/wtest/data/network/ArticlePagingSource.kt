@@ -7,7 +7,6 @@ import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.network.client.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
-import com.pedrofr.wtest.data.network.response.ArticleResponse
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
 import java.io.IOException
 
