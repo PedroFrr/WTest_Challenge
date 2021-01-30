@@ -1,3 +1,3 @@
 package com.pedrofr.wtest.featureutil
 
-const val ARTICLES_BASE_URL = "https://5badefb9a65be000146763a4.mockapi.io/mobile/1-0/"
+const val ARTICLES_BASE_URL = "https://5bb1d1e66418d70014071c9c.mockapi.io/mobile/2-0/"

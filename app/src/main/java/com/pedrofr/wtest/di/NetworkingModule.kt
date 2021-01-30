@@ -1,8 +1,10 @@
 package com.pedrofr.wtest.di
 
-import com.pedrofr.wtest.data.network.client.ArticleClient
-import com.pedrofr.wtest.data.network.client.ArticleService
+import com.pedrofr.wtest.data.network.featureclient.ArticleClient
+import com.pedrofr.wtest.data.network.featureclient.ArticleService
+import com.pedrofr.wtest.data.network.response.ArticlesAdapter
 import com.pedrofr.wtest.featureutil.ARTICLES_BASE_URL
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,10 +33,15 @@ object NetworkingModule {
 
     @Provides
     fun buildArticleRetrofit(client: OkHttpClient): Retrofit {
+
+        val moshi = Moshi.Builder()
+            .add(ArticlesAdapter())
+            .build()
+
         return Retrofit.Builder()
             .client(client)
             .baseUrl(ARTICLES_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create().asLenient())
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .build()
     }
 

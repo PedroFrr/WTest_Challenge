@@ -11,7 +11,7 @@ import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.data.network.ArticlePagingSource
-import com.pedrofr.wtest.data.network.client.ArticleClient
+import com.pedrofr.wtest.data.network.featureclient.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import com.pedrofr.wtest.domain.repository.Repository
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
@@ -56,7 +56,7 @@ class RepositoryImpl @Inject constructor(
         val results = articleClient.fetchArticles()
 
         return if (results is Success) {
-            val articles = results.data.items.map { apiMapper.mapApiArticleToDb(it) }
+            val articles = results.data.map { apiMapper.mapApiArticleToDb(it) }
 
             articleDao.updateArticles(articles)
 

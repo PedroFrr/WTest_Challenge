@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
 import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
-import com.pedrofr.wtest.data.network.client.ArticleClient
+import com.pedrofr.wtest.data.network.featureclient.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
 import java.io.IOException
@@ -24,13 +24,13 @@ class ArticlePagingSource(
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
             val response = articleClient.fetchArticlesPaginated(nextPageNumber, NUMBER_ARTICLES_PAGE)
-            val nextKey = if(response.items.isEmpty()) {
+            val nextKey = if(response.isEmpty()) {
                 null
             }else{
                 nextPageNumber + 1
             }
 
-            val articles = response.items.map { apiMapper.mapApiArticleToDb(it) }
+            val articles = response.map { apiMapper.mapApiArticleToDb(it) }
 
             //TODO right now this is a hack. I should be using RemoteMediator but I'm not figuring out a bug
             articleDao.insertAllArticles(articles = articles)
