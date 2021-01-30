@@ -1,8 +1,10 @@
 package com.pedrofr.wtest.ui
 
+import android.text.Editable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.domain.repository.Repository
 import kotlinx.coroutines.Job
@@ -23,8 +25,9 @@ class PostcodeListViewModel @ViewModelInject constructor(
     init {
 
         //every time the search field changes we re-execute the query
-        _searchPostcodeLiveData = _searchFieldTextLiveData.switchMap {query ->
-            fetchPostcode("*$query*")
+        _searchPostcodeLiveData = _searchFieldTextLiveData.switchMap {
+            val query = it.replace(' ', '*').replace('-',' ')
+            fetchPostcode(query)
         }
 
     }
@@ -46,12 +49,18 @@ class PostcodeListViewModel @ViewModelInject constructor(
                         liveData.postValue(it)
                     }
             } else {
-                repository.fetchPostcodesByQuery(query)
+                val sanitizedQuery = sanitizeSearchQuery(query)
+                repository.fetchPostcodesByQuery(sanitizedQuery).cachedIn(viewModelScope)
                     .collect {
                         liveData.postValue(it)
                     }
             }
         }
         return liveData
+    }
+
+    private fun sanitizeSearchQuery(query: String): String {
+        val queryWithEscapedQuotes = query.replace(Regex.fromLiteral("\""), "\"\"")
+        return queryWithEscapedQuotes
     }
 }

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.pedrofr.wtest.R
+import java.text.Normalizer
 import java.util.regex.Pattern
 
 fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
@@ -59,6 +60,12 @@ fun String.isEmailValid() =
                 ")+"
     ).matcher(this).matches()
 
-
+/**
+ * Helper to set search word to lower case and without accents
+ */
+fun String.removeNonSpacingMarks() =
+    Normalizer.normalize(this, Normalizer.Form.NFD)
+        .replace("\\p{Mn}+".toRegex(), "")
+        .toLowerCase()
 
 

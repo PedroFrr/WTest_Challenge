@@ -39,10 +39,7 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
                 header = PostcodeListLoadingAdapter { postcodesAdapter.retry() },
                 footer = PostcodeListLoadingAdapter { postcodesAdapter.retry() }
             )
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false).apply {
-                stackFromEnd = true
-            }
-
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             hasFixedSize()

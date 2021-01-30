@@ -8,7 +8,7 @@ import androidx.room.Fts4
 @Fts4(contentEntity = DbPostcode::class)
 data class DbPostcodeFTS(
     val id: String,
-    val postalDesignation: String,
+    val postalDesignationAscii: String,
     val postcodeNumber: String,
     val postcodeExtension: String
 )

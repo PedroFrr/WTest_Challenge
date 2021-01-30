@@ -8,6 +8,7 @@ import java.util.*
 data class DbPostcode(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val postalDesignation: String,
+    val postalDesignationAscii: String,
     val postcodeNumber: String,
     val postcodeExtension: String
 )

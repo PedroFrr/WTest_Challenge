@@ -55,6 +55,7 @@ abstract class AppDatabase : RoomDatabase() {
                                 .then(postcodeDatabaseWorker)
                                 .then(clearLocalStorageWorker)
                                 .enqueue()
+
                         }
                     }
                 )
