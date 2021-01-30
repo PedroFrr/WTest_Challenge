@@ -1,6 +1,7 @@
 package com.pedrofr.wtest.workers
 
 import android.content.Context
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
@@ -22,7 +23,16 @@ class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameter
 
         val rows = csvReader { skipMissMatchedRow = true }.readAllWithHeader(file)
 
-        val postcodes = rows.map { row ->
+        //Removes repeated postcodes for same postal designation. 
+        // On the CSV they are not "repeated" since for the same postcode we have different addresses (streets, etc.).
+        // Since we're not interested in the addresses we remove it
+        val rowsDistinct = rows.distinctBy {
+            Triple( it.getValue("desig_postal"),
+            it.getValue("ext_cod_postal"),
+            it.getValue("num_cod_postal"))
+        }
+
+        val postcodes = rowsDistinct.map { row ->
             DbPostcode(
                 postalDesignation = row.getValue("desig_postal"),
                 postcodeExtension = row.getValue("ext_cod_postal"),
