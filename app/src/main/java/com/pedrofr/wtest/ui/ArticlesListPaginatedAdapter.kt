@@ -2,6 +2,8 @@ package com.pedrofr.wtest.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +39,10 @@ class ArticlesListPaginatedAdapter:
                 articleTitle.text = item.title
                 articleAuthor.text = item.author
                 articleSummary.text = item.summary
+                articleCard.setOnClickListener {
+                    val direction = ArticleListFragmentDirections.articleListToDetail(item.id)
+                    Navigation.findNavController(it).navigate(direction)
+                }
 
             }
         }

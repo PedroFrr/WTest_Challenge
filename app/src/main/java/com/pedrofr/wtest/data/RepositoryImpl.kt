@@ -82,7 +82,8 @@ class RepositoryImpl @Inject constructor(
                 enablePlaceholders = false,
                 prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
             ),
-            pagingSourceFactory = { ArticlePagingSource(articleClient) }
+
+            pagingSourceFactory = { ArticlePagingSource(articleClient, articleDao, apiMapper) }
         ).flow
     }
 

@@ -21,16 +21,6 @@ class ArticleListViewModel @ViewModelInject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _articles = MutableLiveData<Result<List<DbArticle>>>()
-    fun fetchArticles(): LiveData<Result<List<DbArticle>>> = _articles
-
-    init {
-//        viewModelScope.launch {
-//            val articles = repository.fetchArticles()
-//            _articles.postValue(articles)
-//        }
-    }
-
     //TODO revise
     fun fetchArticlesPaginated(): Flow<PagingData<ArticleResponse>> {
         return repository.fetchArticlesPaginated().cachedIn(viewModelScope)

@@ -17,14 +17,12 @@ import java.io.IOException
 class ArticleRemoteMediator(
     private val articleClient: ArticleClient,
     private val articleDao: ArticleDao,
-    private val apiMapper: ApiMapper
+    private val apiMapper: ApiMapper,
+    private val pageNumber: Int
 ) : RemoteMediator<Int, DbArticle>() {
-    override suspend fun load(
-        loadType: LoadType,
-        state: PagingState<Int, DbArticle>
-    ): MediatorResult {
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, DbArticle>): MediatorResult {
         return try {
-            val response = articleClient.fetchArticlesPaginated(1, state.pages.size) //TODO change
+            val response = articleClient.fetchArticlesPaginated(pageNumber, NUMBER_ARTICLES_PAGE) //TODO change
 
             val articles = response.articles.map { apiMapper.mapApiArticleToDb(it) }
 

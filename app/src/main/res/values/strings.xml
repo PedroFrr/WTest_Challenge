@@ -13,7 +13,10 @@
     <string name="email_hint">email@example.com</string>
     <string name="numbers_hint">0000...</string>
     <string name="letters_hifen_hint">AAAA-AA...</string>
-    <string name="date_hint">Domingo, 4 de Novembro de 2018</string>
+    <string name="date_hint">04/08/2018</string>
     <string name="empty_error">Field must not be empty</string>
     <string name="email_invalid">Email is not valid</string>
+    <string name="retry">Retry</string>
+    <string name="date_error">Invalid Date</string>
+    <string name="letters_numbers_error">Not a valid format</string>
 </resources>

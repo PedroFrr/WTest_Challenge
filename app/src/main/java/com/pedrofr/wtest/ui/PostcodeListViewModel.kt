@@ -10,6 +10,7 @@ import com.pedrofr.wtest.domain.repository.Repository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class PostcodeListViewModel @ViewModelInject constructor(
@@ -51,7 +52,7 @@ class PostcodeListViewModel @ViewModelInject constructor(
             } else {
                 val sanitizedQuery = sanitizeSearchQuery(query)
                 repository.fetchPostcodesByQuery(sanitizedQuery).cachedIn(viewModelScope)
-                    .collect {
+                    .collectLatest {
                         liveData.postValue(it)
                     }
             }
