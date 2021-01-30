@@ -20,10 +20,9 @@ class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameter
 
         val file = File(csvPath)
 
-
         val rows = csvReader { skipMissMatchedRow = true }.readAllWithHeader(file)
 
-        //Removes repeated postcodes for same postal designation. 
+        //Removes repeated postcodes for same postal designation.
         // On the CSV they are not "repeated" since for the same postcode we have different addresses (streets, etc.).
         // Since we're not interested in the addresses we remove it
         val rowsDistinct = rows.distinctBy {

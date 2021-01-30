@@ -2,6 +2,7 @@ package com.pedrofr.wtest.data.network.client
 
 import com.pedrofr.wtest.core.Failure
 import com.pedrofr.wtest.core.Success
+import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import javax.inject.Inject
 
 class ArticleClient @Inject constructor(
@@ -15,6 +16,8 @@ class ArticleClient @Inject constructor(
         } catch (error: Throwable) {
             Failure(error)
         }
+
+    suspend fun fetchArticlesPaginated(pageNumber: Int, loadSize: Int) = articleService.fetchArticles(page = pageNumber, loadSize = loadSize)
 
 }
 

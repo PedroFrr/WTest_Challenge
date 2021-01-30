@@ -36,8 +36,8 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
         binding.postcodeRecyclerView.apply {
             adapter = postcodesAdapter
             adapter = postcodesAdapter.withLoadStateHeaderAndFooter(
-                header = PostcodeListLoadingAdapter { postcodesAdapter.retry() },
-                footer = PostcodeListLoadingAdapter { postcodesAdapter.retry() }
+                header = LoadingAdapter { postcodesAdapter.retry() },
+                footer = LoadingAdapter { postcodesAdapter.retry() }
             )
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

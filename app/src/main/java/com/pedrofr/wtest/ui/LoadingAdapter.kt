@@ -8,8 +8,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.wtest.databinding.ItemLoadingStateBinding
 
-class PostcodeListLoadingAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<PostcodeListLoadingAdapter.LoadingStateViewHolder>() {
+class LoadingAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadingAdapter.LoadingStateViewHolder>() {
 
     override fun onBindViewHolder(holder: LoadingStateViewHolder, loadState: LoadState) {
         holder.bindState(loadState)
@@ -36,7 +36,6 @@ class PostcodeListLoadingAdapter(private val retry: () -> Unit) :
         fun bindState(loadState: LoadState) {
             with(binding) {
                 progressBar.isVisible = loadState is LoadState.Loading
-
             }
 
         }

@@ -10,9 +10,13 @@ import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
+import com.pedrofr.wtest.data.network.ArticlePagingSource
+import com.pedrofr.wtest.data.network.ArticleRemoteMediator
 import com.pedrofr.wtest.data.network.client.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
+import com.pedrofr.wtest.data.network.response.ArticleResponse
 import com.pedrofr.wtest.domain.repository.Repository
+import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -53,21 +57,36 @@ class RepositoryImpl @Inject constructor(
     override suspend fun fetchArticles(): Result<List<DbArticle>> {
         val results = articleClient.fetchArticles()
 
-        return if(results is Success){
+        return if (results is Success) {
             val articles = results.data.articles.map { apiMapper.mapApiArticleToDb(it) }
 
             articleDao.updateArticles(articles)
 
             Success(articles)
 
-        }else {
+        } else {
             Failure((results as Failure).error) //TODO refactor
         }
 
 
     }
 
-    override suspend fun fetchArticle(articleId: String): DbArticle = articleDao.fetchArticle(articleId)
+    override suspend fun fetchArticle(articleId: String): DbArticle =
+        articleDao.fetchArticle(articleId)
+
+    override fun fetchArticlesPaginated(): Flow<PagingData<ArticleResponse>> {
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = NUMBER_ARTICLES_PAGE,
+                enablePlaceholders = false,
+                prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
+            ),
+            pagingSourceFactory = { ArticlePagingSource(articleClient) }
+        ).flow
+    }
+
 
 }
+
 
