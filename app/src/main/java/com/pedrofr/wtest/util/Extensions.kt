@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.pedrofr.wtest.R
 import java.text.Normalizer
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 import java.util.regex.Pattern
 
 fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
@@ -72,27 +74,9 @@ fun String.isEmailValid() =
     ).matcher(this).matches()
 
 
-fun String.isDateValid(): Boolean {
-    val regexCondition = Pattern.compile(
+fun String.isDateFormatValid() = Pattern.compile(
         "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d\\d)"
     ).matcher(this).matches()
-
-//    val date = LocalDateTime
-//        .parse(q.ADDDATE)
-//        .toLocalDate()
-//        .format(
-//            DateTimeFormatter
-//                .ofLocalizedDate(FormatStyle.LONG)
-//                .withLocale(Locale.ENGLISH)
-//        )
-//
-//    val dateView = dat
-    val futureDateCondition = true
-
-    return regexCondition && futureDateCondition
-
-}
-
 
 
 /**
@@ -103,4 +87,14 @@ fun String.removeNonSpacingMarks() =
         .replace("\\p{Mn}+".toRegex(), "")
         .toLowerCase()
 
+/**
+ * Date helpter functions
+ */
+
+fun String.getDate(format: String): Date? {
+//    val calendar = Calendar.getInstance()
+    val formatter = SimpleDateFormat(format, Locale.ENGLISH)
+    return formatter.parse(this)
+
+}
 

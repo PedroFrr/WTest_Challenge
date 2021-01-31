@@ -100,6 +100,7 @@ class RepositoryImpl @Inject constructor(
         ).flow
     }
 
+    override suspend fun fetchData(): DbPostcode = postcodeDao.fetchData()
 
 }
 

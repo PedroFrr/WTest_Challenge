@@ -20,4 +20,6 @@ interface Repository {
     fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>>
 
     fun fetchCommentsPaginated(articleId: String): Flow<PagingData<CommentResponse>>
+
+    suspend fun fetchData(): DbPostcode?
 }

@@ -23,4 +23,5 @@
     <string name="options_error">Only Mau; Satisfatório; Bom; Muito Bom; Excelente are valid</string>
     <string name="postcode_hint">####-###, PostalDesignation</string>
     <string name="comments_header">Comments</string>
+    <string name="loading_postcode_csv">Please wait while Postcode CSV is being processed</string>
 </resources>

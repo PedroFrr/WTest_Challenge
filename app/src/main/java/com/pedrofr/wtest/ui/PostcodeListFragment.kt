@@ -91,9 +91,11 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
                 lifecycleScope.launch {
                     if(postcodeListViewModel.fetchData() != null){
                         binding.loadingProgressBar.gone()
+                        binding.postcodeProcessingText.gone()
                         postcodesAdapter.submitData(pagingData)
                     }else{
                         binding.loadingProgressBar.visible()
+                        binding.postcodeProcessingText.visible()
                     }
                 }
 
