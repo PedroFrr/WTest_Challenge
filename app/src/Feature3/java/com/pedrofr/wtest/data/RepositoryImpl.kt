@@ -13,6 +13,7 @@ import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.data.network.ArticlePagingSource
 import com.pedrofr.wtest.data.network.featureclient.ArticleClient
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
+import com.pedrofr.wtest.domain.repository.Repository
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.FragmentArticleDetailBinding
-import com.pedrofr.wtest.ui.ArticleDetailViewModel
 import com.pedrofr.wtest.util.loadImage
 import com.pedrofr.wtest.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
