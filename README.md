@@ -21,6 +21,7 @@
 - [Kotlin CSV](https://github.com/doyaaaaaken/kotlin-csv)
 - [Paging 3] (https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - [ViewBinding] (https://developer.android.com/topic/libraries/view-binding)
+- [Glide] (https://github.com/bumptech/glide)
 
 ## Architecture
 The application is based on MVVM architecture and a repository pattern.
@@ -54,5 +55,7 @@ Form validation
 - Postcode field: Can't be empty and the inserted postcode must be on the postcode application list. Once the postcode is valid the corresponding postal designation is shown on the respective field
 
 All strings on the application are set on the strings file so internationalization is made possible 
+
+Glide is used in order to load the images from an URL. the timeout is set to 1 minute as some images are taking a long time to load. Some images can't be loaded from the API (not valid) and on this cases we have an error and a placeholder image.
 
 
