@@ -55,23 +55,6 @@ class RepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun fetchArticles(): Result<List<DbArticle>> {
-        val results = articleClient.fetchArticles()
-
-        return if (results is Success) {
-            val articles = results.data.map { apiMapper.mapApiArticleToDb(it) }
-
-            articleDao.updateArticles(articles)
-
-            Success(articles)
-
-        } else {
-            Failure((results as Failure).error) //TODO refactor
-        }
-
-
-    }
-
     override suspend fun fetchArticle(articleId: String): DbArticle =
         articleDao.fetchArticle(articleId)
 
@@ -81,7 +64,7 @@ class RepositoryImpl @Inject constructor(
             config = PagingConfig(
                 pageSize = NUMBER_ARTICLES_PAGE,
                 enablePlaceholders = false,
-                prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
+                prefetchDistance = 1
             ),
 
             pagingSourceFactory = { ArticlePagingSource(articleClient, articleDao, apiMapper) }
@@ -93,7 +76,7 @@ class RepositoryImpl @Inject constructor(
             config = PagingConfig(
                 pageSize = NUMBER_COMMENTS_PAGE,
                 enablePlaceholders = false,
-                prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
+                prefetchDistance = 1
             ),
 
             pagingSourceFactory = { CommentPagingSource(articleClient, articleId) }
@@ -101,6 +84,9 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun fetchData(): DbPostcode = postcodeDao.fetchData()
+
+    override suspend fun fetchValidPostcode(postcodeNumber: String, postcodeExtension: String): DbPostcode =
+        postcodeDao.fetchValidPostcode(postcodeNumber, postcodeExtension)
 
 }
 

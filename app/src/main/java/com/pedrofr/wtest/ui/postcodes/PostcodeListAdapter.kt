@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.ui.postcodes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,14 +10,18 @@ import com.pedrofr.wtest.databinding.ListItemPostcodeBinding
 
 
 class PostCodeListAdapter :
-    PagingDataAdapter<DbPostcode, PostCodeListAdapter.ViewHolder>(PostcodeListListDiffCallBack()) {
+    PagingDataAdapter<DbPostcode, PostCodeListAdapter.ViewHolder>(
+        PostcodeListListDiffCallBack()
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
     }
 
     class ViewHolder private constructor(
@@ -27,14 +31,15 @@ class PostCodeListAdapter :
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemPostcodeBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
 
         fun bind(item: DbPostcode) {
             with(binding) {
-                //TODO add bindings - clickListenter, name ....
-                postcode.text = "${item.postcodeNumber}-${item.postcodeExtension}" //TODO change in the future if needed to placeholder
+                postcode.text = "${item.postcodeNumber}-${item.postcodeExtension}"
                 postalDesignation.text = item.postalDesignation
             }
 

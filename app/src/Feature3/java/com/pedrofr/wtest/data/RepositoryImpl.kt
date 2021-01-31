@@ -58,12 +58,12 @@ class RepositoryImpl @Inject constructor(
         return if (results is Success) {
             val articles = results.data.articles.map { apiMapper.mapApiArticleToDb(it) }
 
-            articleDao.updateArticles(articles)
+            articleDao.insertAllArticles(articles)
 
             Success(articles)
 
         } else {
-            Failure((results as Failure).error) //TODO refactor
+            Failure((results as Failure).error)
         }
 
 
@@ -78,7 +78,7 @@ class RepositoryImpl @Inject constructor(
             config = PagingConfig(
                 pageSize = NUMBER_ARTICLES_PAGE,
                 enablePlaceholders = false,
-                prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
+                prefetchDistance = 1 //prefetches one page, meaning if user scrolls slow enough he will never see a loading status
             ),
 
             pagingSourceFactory = { ArticlePagingSource(articleClient, articleDao, apiMapper) }

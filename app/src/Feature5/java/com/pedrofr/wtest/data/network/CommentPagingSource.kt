@@ -8,7 +8,6 @@ import com.pedrofr.wtest.data.network.featureresponse.CommentResponse
 import com.pedrofr.wtest.featureutil.NUMBER_COMMENTS_PAGE
 import java.io.IOException
 
-//TODO add dependecy injection?
 class CommentPagingSource(
     private val articleClient: ArticleClient,
     private val articleId: String
@@ -29,8 +28,8 @@ class CommentPagingSource(
 
             return LoadResult.Page(
                 data = response,
-                prevKey = null, //Only paging forward //TODO revise
-                nextKey = nextKey //TODO revise
+                prevKey = null, //Only paging forward
+                nextKey = nextKey
             )
 
         } catch (exception: IOException) {

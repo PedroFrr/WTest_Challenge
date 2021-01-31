@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.featureui
+package com.pedrofr.wtest.featureui.articles
 
 import android.os.Bundle
 import android.view.View
@@ -38,7 +38,10 @@ class ArticleDetailFragment : Fragment(R.layout.fragment_article_detail) {
 
     private fun initUi(){
         arguments?.let {
-            val args = ArticleDetailFragmentArgs.fromBundle(it)
+            val args =
+                ArticleDetailFragmentArgs.fromBundle(
+                    it
+                )
             articleId = args.articleId
             articleDetailViewModel.fetchArticleDetail(articleId)
 
@@ -77,13 +80,13 @@ class ArticleDetailFragment : Fragment(R.layout.fragment_article_detail) {
             .observe(viewLifecycleOwner, Observer<DbArticle> { article ->
 
                 binding.apply {
-                    articleHero.loadImage(article.hero)
+                    articleHero.loadImage(article.hero, R.drawable.ic_baseline_article_24)
                     articleAuthor.text = article.author
                     articleTitle.text = article.title
                     articlePublishedAt.text = article.publishedAt
                     articleBody.text = article.body
-                    articleAuthorAvatar.loadCircleImage(article.author)
-
+                    articleAuthorAvatar.loadCircleImage(article.author, R.drawable.ic_baseline_supervised_user_circle_24)
+                    textHeader.visible()
                 }
 
             })

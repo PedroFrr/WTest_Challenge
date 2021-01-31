@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.ui.postcodes
 
 import android.os.Bundle
 import android.view.View
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.FragmentPostCodeListBinding
+import com.pedrofr.wtest.ui.LoadingAdapter
 import com.pedrofr.wtest.util.gone
 import com.pedrofr.wtest.util.toast
 import com.pedrofr.wtest.util.viewBinding
@@ -81,7 +82,6 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
     }
 
     private fun initObservables() {
-        //TODO see if I can change this to KTX (just have to declare the type)
         postcodeListViewModel.fetchPostcodes()
             .observe(viewLifecycleOwner, Observer<PagingData<DbPostcode>> { pagingData ->
 

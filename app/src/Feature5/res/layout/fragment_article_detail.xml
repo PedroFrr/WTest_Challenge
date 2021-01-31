@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".featureui.ArticleDetailFragment">
+    tools:context=".featureui.articles.ArticleDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,6 +97,19 @@
             app:layout_scrollFlags="enterAlways"
             tools:targetApi="O"
             tools:text="@string/really_long_string" />
+
+        <TextView
+            android:id="@+id/textHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/comments_header"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/padding_standard"
+            android:background="@color/colorAccent"
+            android:padding="8dp"
+            android:visibility="gone"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRecyclerView"

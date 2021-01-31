@@ -6,7 +6,7 @@
     app:startDestination="@id/postcodeListFragment">
     <fragment
         android:id="@+id/articleListFragment"
-        android:name="com.pedrofr.wtest.ui.ArticleListFragment"
+        android:name="com.pedrofr.wtest.ui.articles.ArticleListFragment"
         android:label="fragment_article_list"
         tools:layout="@layout/fragment_article_list" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/articleDetailFragment"
-        android:name="com.pedrofr.wtest.featureui.ArticleDetailFragment"
+        android:name="com.pedrofr.wtest.featureui.articles.ArticleDetailFragment"
         android:label="fragment_article_detail"
         tools:layout="@layout/fragment_article_detail" >
         <argument
@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/postcodeListFragment"
-        android:name="com.pedrofr.wtest.ui.PostcodeListFragment"
+        android:name="com.pedrofr.wtest.ui.postcodes.PostcodeListFragment"
         android:label="fragment_post_code_list"
         tools:layout="@layout/fragment_post_code_list" />
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.pedrofr.wtest.ui.FormFragment"
+        android:name="com.pedrofr.wtest.ui.form.FormFragment"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" />
 </navigation>

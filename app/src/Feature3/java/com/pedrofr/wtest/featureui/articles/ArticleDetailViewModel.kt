@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.featureui
+package com.pedrofr.wtest.featureui.articles
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData

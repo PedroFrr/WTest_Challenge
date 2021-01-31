@@ -18,7 +18,7 @@ import com.pedrofr.wtest.workers.DownloadPostcodeCsvWorker
 import com.pedrofr.wtest.workers.PostcodeDatabaseWorker
 
 /**
- * SQLite Database for storing the logs.
+ * SQLite Database for storing articles and postcodes
  */
 @Database(entities = [DbPostcode::class, DbArticle::class, DbPostcodeFTS::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -36,17 +36,23 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * Builds the database.
+         * The SQLite database is only created when it's accessed for the first time.
+         * On creation 3 workers are executed to populate the postcode list
+         */
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .addCallback(
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            //TODO set constraints network, storage so the operation succeeds - test if no network it will eventually download. Show error
+
                             val downloadPostcodeCsvWorker = OneTimeWorkRequestBuilder<DownloadPostcodeCsvWorker>().build()
                             val postcodeDatabaseWorker = OneTimeWorkRequestBuilder<PostcodeDatabaseWorker>().build()
                             val clearLocalStorageWorker = OneTimeWorkRequestBuilder<ClearLocalStorageWorker>().build()
-                            //TODO add comment
+
+                            //Chained work - executes the workers in the defined order below
                             WorkManager.getInstance(context)
                                 .beginWith(downloadPostcodeCsvWorker)
                                 .then(postcodeDatabaseWorker)

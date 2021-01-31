@@ -18,9 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkingModule {
 
-
-    //TODO Add Authorization Interceptor if Token is needed for API
-
     @Provides
     fun provideClient(): OkHttpClient =
         OkHttpClient.Builder()

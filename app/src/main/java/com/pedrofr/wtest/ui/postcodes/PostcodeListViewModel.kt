@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.ui.postcodes
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*

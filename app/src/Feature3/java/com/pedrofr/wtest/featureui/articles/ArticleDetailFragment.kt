@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.featureui
+package com.pedrofr.wtest.featureui.articles
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.FragmentArticleDetailBinding
+import com.pedrofr.wtest.featureui.articles.ArticleDetailFragmentArgs
 import com.pedrofr.wtest.util.loadImage
 import com.pedrofr.wtest.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class ArticleDetailFragment : Fragment(R.layout.fragment_article_detail) {
             .observe(viewLifecycleOwner, Observer<DbArticle> { article ->
 
                 binding.apply {
-                    articleHero.loadImage(article.hero)
+                    articleHero.loadImage(article.hero, R.drawable.ic_baseline_article_24)
                     articleAuthor.text = article.author
                     articleTitle.text = article.title
                     articlePublishedAt.text = article.publishedAt

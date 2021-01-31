@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.featureui
+package com.pedrofr.wtest.featureui.articles
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.ListItemArticleBinding
-import com.pedrofr.wtest.ui.ArticleListFragmentDirections
+import com.pedrofr.wtest.ui.articles.ArticleListFragmentDirections
 
 
 class ArticlesListPaginatedAdapter:
@@ -38,7 +38,6 @@ class ArticlesListPaginatedAdapter:
                 articleTitle.text = item.title
                 articleAuthor.text = item.author
                 articleSummary.text = item.summary
-                articlePublishedAt.text = item.publishedAt
                 articleCard.setOnClickListener {
                     val direction = ArticleListFragmentDirections.articleListToDetail(item.id)
                     Navigation.findNavController(it).navigate(direction)

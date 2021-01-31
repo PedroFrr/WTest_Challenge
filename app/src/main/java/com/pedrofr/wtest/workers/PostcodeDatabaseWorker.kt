@@ -9,6 +9,9 @@ import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.util.removeNonSpacingMarks
 import java.io.File
 
+/**
+ * Worker which reads the postcode CSV saved on the given path and inserts its content on the AppDatabase
+ */
 class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters) {
 

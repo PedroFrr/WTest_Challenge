@@ -13,5 +13,5 @@ data class DbArticle(
     val body: String,
     val hero: String,
     val publishedAt: String,
-    val avatar: String = "" //TODO see if I should isolate this into the Feature5 flavour
+    val avatar: String = ""
     )

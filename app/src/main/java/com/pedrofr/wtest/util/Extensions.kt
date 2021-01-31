@@ -38,21 +38,23 @@ fun View.invisible() {
 /**
  * Glide helper functions
  */
-fun ImageView.loadImage(imageUrl: String) {
+fun ImageView.loadImage(imageUrl: String, placeHolderResourceId: Int) {
     Glide.with(this)
         .load(imageUrl)
         .centerCrop()
         .timeout(60000)
-        .placeholder(R.drawable.ic_baseline_error_24) //TODO change drawable
+        .placeholder(placeHolderResourceId)
+        .error(R.drawable.ic_baseline_error_24)
         .into(this)
 }
 
-fun ImageView.loadCircleImage(imageUrl: String) {
+fun ImageView.loadCircleImage(imageUrl: String, placeHolderResourceId: Int) {
     Glide.with(this)
         .load(imageUrl)
-        .circleCrop()
+        .circleCrop() //shapes image into a circle
         .timeout(60000)
-        .placeholder(R.drawable.ic_baseline_error_24) //TODO change drawable
+        .placeholder(placeHolderResourceId)
+        .error(R.drawable.ic_baseline_error_24)
         .into(this)
 }
 
@@ -85,7 +87,7 @@ fun String.removeNonSpacingMarks() =
         .toLowerCase()
 
 /**
- * Date helpter functions
+ * Date helper functions
  */
 
 fun String.getDate(format: String): Date? {
@@ -93,5 +95,16 @@ fun String.getDate(format: String): Date? {
     val formatter = SimpleDateFormat(format, Locale.ENGLISH)
     return formatter.parse(this)
 
+}
+
+fun String.timestampToDate(): String {
+    val formatterParser = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSSSS'Z'", Locale.getDefault())
+    formatterParser.timeZone = TimeZone.getTimeZone("UTC")
+    val date = formatterParser.parse(this)
+
+    val formattedDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    return date?.let{
+        formattedDate.format(date)
+    } ?: ""
 }
 

@@ -5,7 +5,8 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 /**
- * TODO - Add comment
+ * Worker that deletes all files stored on the app media
+ * This is done because once the CSV content is inserted into the AppDatabase we will not need it anymore
  */
 class ClearLocalStorageWorker(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters) {

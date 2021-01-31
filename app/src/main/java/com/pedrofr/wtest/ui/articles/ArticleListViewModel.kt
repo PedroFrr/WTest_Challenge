@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.ui.articles
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -13,7 +13,6 @@ class ArticleListViewModel @ViewModelInject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    //TODO revise
     fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>> {
         return repository.fetchArticlesPaginated().cachedIn(viewModelScope)
     }

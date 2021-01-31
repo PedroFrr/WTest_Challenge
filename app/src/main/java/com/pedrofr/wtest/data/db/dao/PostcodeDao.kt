@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 
+/**
+ * The Data Access Object for the [DbPostcode] class.
+ */
 @Dao
 interface PostcodeDao {
 
@@ -15,9 +18,6 @@ interface PostcodeDao {
 
     @Query("SELECT * FROM postcode ORDER BY postalDesignation, postcodeNumber")
     fun fetchPostcodes(): PagingSource<Int, DbPostcode>
-
-    @Query("SELECT * FROM postcode WHERE postalDesignation LIKE  REPLACE(:query, ' ', '%') ORDER BY postalDesignation, postcodeNumber ") //TODO replace WHERE clause
-    fun search(query: String): PagingSource<Int, DbPostcode>
 
     //Full text search on Postcode
     //Allows to search in reverse order, full or partial words and with accents
@@ -39,7 +39,6 @@ interface PostcodeDao {
     suspend fun fetchData(): DbPostcode
 
     //Query used to check if Postcode is valid.
-    //TODO add postalDesignation validation "and postalDesignation = :postalDesignation"
     @Query(
         """
         SELECT * 

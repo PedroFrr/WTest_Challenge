@@ -15,6 +15,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Splash Screen Theme -->
+    <style name="SplashTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="ArticleTitle" >
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/article_title_text_size</item>
@@ -24,6 +31,7 @@
     <style name="ArticlePublishedAt" >
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Form.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

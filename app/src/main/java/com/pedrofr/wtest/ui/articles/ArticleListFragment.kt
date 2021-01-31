@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.ui.articles
 
 import android.os.Bundle
 import android.view.View
@@ -7,13 +7,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.databinding.FragmentArticleListBinding
-import com.pedrofr.wtest.featureui.ArticlesListPaginatedAdapter
+import com.pedrofr.wtest.featureui.articles.ArticlesListPaginatedAdapter
+import com.pedrofr.wtest.ui.LoadingAdapter
 import com.pedrofr.wtest.util.gone
 import com.pedrofr.wtest.util.toast
 import com.pedrofr.wtest.util.viewBinding
@@ -79,11 +79,5 @@ class ArticleListFragment : Fragment(R.layout.fragment_article_list) {
             }
         }
 
-    }
-
-
-    private fun navigateToArticleDetail(view: View, articleId: String) {
-        val direction = ArticleListFragmentDirections.articleListToDetail(articleId)
-        view.findNavController().navigate(direction)
     }
 }

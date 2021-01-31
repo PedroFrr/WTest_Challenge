@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-//    TODO change to 30, just a workaround to download csv file
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion "30.0.3"
 

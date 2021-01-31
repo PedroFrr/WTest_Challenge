@@ -4,14 +4,11 @@ import androidx.paging.PagingSource
 import androidx.room.*
 import com.pedrofr.wtest.data.db.entities.DbArticle
 
+/**
+ * The Data Access Object for the [DbArticle] class.
+ */
 @Dao
 interface ArticleDao {
-
-    @Transaction
-    suspend fun updateArticles(articles: List<DbArticle>) {
-        clearArticles()
-        insertAllArticles(articles)
-    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllArticles(articles: List<DbArticle>)

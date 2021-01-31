@@ -11,7 +11,10 @@ import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-//TODO see if I should change this to a coroutine worker
+/**
+ * Worker that downloads Postcode CSV and saves it into app media
+ *The downloaded CSV is passed as output along the next Worker
+ */
 class DownloadPostcodeCsvWorker(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters) {
 
@@ -23,19 +26,20 @@ class DownloadPostcodeCsvWorker(context: Context, workerParameters: WorkerParame
     override fun doWork(): Result {
         try {
             Log.d(TAG, "Started downloading...")
-            val csvUrl = URL(POSTCODE_BASE_URL) //TODO check if we should instead pass it in as input_data
+            val csvUrl = URL(POSTCODE_BASE_URL)
 
             val connection = csvUrl.openConnection() as HttpURLConnection
             connection.doInput = true
             connection.connect()
 
-            val csvPath = "${System.currentTimeMillis()}.csv"
+            val csvPath = "${System.currentTimeMillis()}.csv" //file name
             val inputStream = connection.inputStream
             val file = File(applicationContext.externalMediaDirs.first(), csvPath)
 
+            //Saves csv file on media using part to avoid saving it at once
             val outputStream = FileOutputStream(file)
             outputStream.use { output ->
-                val buffer = ByteArray(4*1024) //TODO change
+                val buffer = ByteArray(4*1024)
                 var byteCount = inputStream.read(buffer)
 
                 while(byteCount > 0) {

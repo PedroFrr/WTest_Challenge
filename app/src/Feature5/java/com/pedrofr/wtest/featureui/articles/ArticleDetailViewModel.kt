@@ -27,7 +27,10 @@ class ArticleDetailViewModel @ViewModelInject constructor(
         }
     }
 
-    //TODO revise
+    /*
+    The Paginated comments are passed along to the View with Flow
+    This could have been converted into LiveData
+     */
     fun fetchCommentsPaginated(articleId: String): Flow<PagingData<CommentResponse>> {
         return repository.fetchCommentsPaginated(articleId).cachedIn(viewModelScope)
     }

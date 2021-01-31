@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.featureui
+package com.pedrofr.wtest.featureui.articles
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,18 +8,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.ListItemArticleBinding
-import com.pedrofr.wtest.ui.ArticleListFragmentDirections
+import com.pedrofr.wtest.ui.articles.ArticleListFragmentDirections
+import com.pedrofr.wtest.util.timestampToDate
 
-
+/**
+ * PaginatedAdapter for lis of articles
+ */
 class ArticlesListPaginatedAdapter:
-    PagingDataAdapter<DbArticle, ArticlesListPaginatedAdapter.ViewHolder>(ArticlesPaginatedListListDiffCallBack()) {
+    PagingDataAdapter<DbArticle, ArticlesListPaginatedAdapter.ViewHolder>(
+        ArticlesPaginatedListListDiffCallBack()
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
     }
 
     class ViewHolder private constructor(
@@ -29,7 +36,9 @@ class ArticlesListPaginatedAdapter:
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemArticleBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
 
@@ -38,6 +47,7 @@ class ArticlesListPaginatedAdapter:
                 articleTitle.text = item.title
                 articleAuthor.text = item.author
                 articleSummary.text = item.summary
+                articlePublishedAt.text = item.publishedAt.timestampToDate()
                 articleCard.setOnClickListener {
                     val direction = ArticleListFragmentDirections.articleListToDetail(item.id)
                     Navigation.findNavController(it).navigate(direction)
