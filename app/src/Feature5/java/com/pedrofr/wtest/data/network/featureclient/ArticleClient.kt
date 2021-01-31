@@ -19,5 +19,7 @@ class ArticleClient @Inject constructor(
 
     suspend fun fetchArticlesPaginated(pageNumber: Int, loadSize: Int) = articleService.fetchArticles(page = pageNumber, loadSize = loadSize)
 
+    suspend fun fetchCommentsPaginated(articleId: String, pageNumber: Int, loadSize: Int) = articleService.fetchComments(articleId = articleId, page = pageNumber, loadSize = loadSize)
+
 }
 

@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.ui
+package com.pedrofr.wtest.featureui
 
 import android.os.Bundle
 import android.view.View
@@ -6,17 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.pedrofr.wtest.R
-import com.pedrofr.wtest.core.Failure
-import com.pedrofr.wtest.core.Loading
-import com.pedrofr.wtest.core.Result
-import com.pedrofr.wtest.core.Success
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.databinding.FragmentArticleDetailBinding
-import com.pedrofr.wtest.databinding.FragmentPostCodeListBinding
-import com.pedrofr.wtest.util.gone
+import com.pedrofr.wtest.ui.ArticleDetailViewModel
 import com.pedrofr.wtest.util.loadImage
 import com.pedrofr.wtest.util.viewBinding
-import com.pedrofr.wtest.util.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

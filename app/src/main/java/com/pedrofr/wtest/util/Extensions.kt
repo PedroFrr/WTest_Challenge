@@ -45,7 +45,15 @@ fun ImageView.loadImage(imageUrl: String) {
         .centerCrop()
         .timeout(60000)
         .placeholder(R.drawable.ic_baseline_error_24) //TODO change drawable
-        .dontAnimate()
+        .into(this)
+}
+
+fun ImageView.loadCircleImage(imageUrl: String) {
+    Glide.with(this)
+        .load(imageUrl)
+        .circleCrop()
+        .timeout(60000)
+        .placeholder(R.drawable.ic_baseline_error_24) //TODO change drawable
         .into(this)
 }
 

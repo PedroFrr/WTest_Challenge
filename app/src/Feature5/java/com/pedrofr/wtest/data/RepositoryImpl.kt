@@ -11,9 +11,12 @@ import com.pedrofr.wtest.data.db.dao.PostcodeDao
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.data.network.ArticlePagingSource
+import com.pedrofr.wtest.data.network.CommentPagingSource
 import com.pedrofr.wtest.data.network.featureclient.ArticleClient
+import com.pedrofr.wtest.data.network.featureresponse.CommentResponse
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import com.pedrofr.wtest.domain.repository.Repository
+import com.pedrofr.wtest.featureutil.NUMBER_COMMENTS_PAGE
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -82,6 +85,18 @@ class RepositoryImpl @Inject constructor(
             ),
 
             pagingSourceFactory = { ArticlePagingSource(articleClient, articleDao, apiMapper) }
+        ).flow
+    }
+
+    override fun fetchCommentsPaginated(articleId: String): Flow<PagingData<CommentResponse>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NUMBER_COMMENTS_PAGE,
+                enablePlaceholders = false,
+                prefetchDistance = 1 //TODO revise or if I should remove in order to make infinite scrolling
+            ),
+
+            pagingSourceFactory = { CommentPagingSource(articleClient, articleId) }
         ).flow
     }
 

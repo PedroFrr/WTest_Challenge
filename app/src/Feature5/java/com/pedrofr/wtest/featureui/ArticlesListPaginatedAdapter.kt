@@ -38,6 +38,7 @@ class ArticlesListPaginatedAdapter:
                 articleTitle.text = item.title
                 articleAuthor.text = item.author
                 articleSummary.text = item.summary
+                articlePublishedAt.text = item.publishedAt
                 articleCard.setOnClickListener {
                     val direction = ArticleListFragmentDirections.articleListToDetail(item.id)
                     Navigation.findNavController(it).navigate(direction)

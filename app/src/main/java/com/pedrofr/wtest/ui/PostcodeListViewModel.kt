@@ -1,6 +1,5 @@
 package com.pedrofr.wtest.ui
 
-import android.text.Editable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
@@ -49,6 +48,7 @@ class PostcodeListViewModel @ViewModelInject constructor(
                     .collect {
                         liveData.postValue(it)
                     }
+
             } else {
                 val sanitizedQuery = sanitizeSearchQuery(query)
                 repository.fetchPostcodesByQuery(sanitizedQuery).cachedIn(viewModelScope)

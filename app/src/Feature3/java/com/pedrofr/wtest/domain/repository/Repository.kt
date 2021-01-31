@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.pedrofr.wtest.core.Result
 import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
+import com.pedrofr.wtest.data.network.featureresponse.CommentResponse
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
@@ -17,4 +18,5 @@ interface Repository {
     suspend fun fetchArticle(articleId: String): DbArticle
 
     fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>>
+
 }

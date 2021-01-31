@@ -30,14 +30,13 @@
 
         <!--TODO change this style-->
         <TextView
-            android:id="@+id/publishedAt"
+            android:id="@+id/articlePublishedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_half"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/ArticleTitle"
-            android:text="This is feature 5 published"
+            style="@style/ArticlePublishedAt"
             tools:text="1 de Outubro de 2018" />
 
         <TextView

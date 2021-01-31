@@ -1,4 +1,4 @@
-package com.pedrofr.wtest.data.network.client
+package com.pedrofr.wtest.data.network.featureclient
 
 import com.pedrofr.wtest.data.network.featureresponse.GetArticlesResponse
 import com.pedrofr.wtest.util.NUMBER_ARTICLES_PAGE

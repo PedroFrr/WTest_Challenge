@@ -21,10 +21,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ArticlePublishedAt" >
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Form.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextColor">@color/colorPrimaryDark</item>
         <item name="boxStrokeColor">@color/colorPrimary</item>
     </style>
+
 
 
 </resources>

@@ -1,8 +1,7 @@
-package com.pedrofr.wtest.data.network.client
+package com.pedrofr.wtest.data.network.featureclient
 
 import com.pedrofr.wtest.core.Failure
 import com.pedrofr.wtest.core.Success
-import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import javax.inject.Inject
 
 class ArticleClient @Inject constructor(

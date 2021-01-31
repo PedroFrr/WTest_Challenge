@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/articleDetailFragment"
-        android:name="com.pedrofr.wtest.ui.ArticleDetailFragment"
+        android:name="com.pedrofr.wtest.featureui.ArticleDetailFragment"
         android:label="fragment_article_detail"
         tools:layout="@layout/fragment_article_detail" >
         <argument
