@@ -86,6 +86,9 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun fetchData(): DbPostcode = postcodeDao.fetchData()
+
+    override suspend fun fetchValidPostcode(postcodeNumber: String, postcodeExtension: String): DbPostcode =
+        postcodeDao.fetchValidPostcode(postcodeNumber, postcodeExtension)
 }
 
 

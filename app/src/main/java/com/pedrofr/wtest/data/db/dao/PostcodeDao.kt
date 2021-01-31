@@ -5,9 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PostcodeDao {
@@ -21,6 +19,8 @@ interface PostcodeDao {
     @Query("SELECT * FROM postcode WHERE postalDesignation LIKE  REPLACE(:query, ' ', '%') ORDER BY postalDesignation, postcodeNumber ") //TODO replace WHERE clause
     fun search(query: String): PagingSource<Int, DbPostcode>
 
+    //Full text search on Postcode
+    //Allows to search in reverse order, full or partial words and with accents
     @Query(
         """
         SELECT *
@@ -37,4 +37,19 @@ interface PostcodeDao {
     //Fetches one single Article in order to validate if there's data on the database
     @Query("SELECT * FROM postcode LIMIT 1")
     suspend fun fetchData(): DbPostcode
+
+    //Query used to check if Postcode is valid.
+    //TODO add postalDesignation validation "and postalDesignation = :postalDesignation"
+    @Query(
+        """
+        SELECT * 
+        FROM postcode 
+        WHERE postcodeNumber = :postcodeNumber and postcodeExtension = :postcodeExtension
+        LIMIT 1"""
+    )
+    suspend fun fetchValidPostcode(
+        postcodeNumber: String,
+        postcodeExtension: String
+    ): DbPostcode
+
 }

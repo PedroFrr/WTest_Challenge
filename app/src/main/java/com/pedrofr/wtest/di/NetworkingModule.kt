@@ -1,7 +1,7 @@
 package com.pedrofr.wtest.di
 
-import com.pedrofr.wtest.data.network.featureclient.ArticleService
 import com.pedrofr.wtest.data.network.featureclient.ArticleClient
+import com.pedrofr.wtest.data.network.featureclient.ArticleService
 import com.pedrofr.wtest.featureutil.ARTICLES_BASE_URL
 import dagger.Module
 import dagger.Provides

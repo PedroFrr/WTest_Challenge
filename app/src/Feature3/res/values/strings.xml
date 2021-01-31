@@ -19,5 +19,5 @@
     <string name="letters_numbers_error">Not a valid format</string>
     <string name="option_hint">Quality</string>
     <string name="options_error">Only Mau; Satisfatório; Bom; Muito Bom; Excelente are valid</string>
-    <string name="postcode_hint">####-###, PostalDesignation</string>
+    <string name="postcode_hint">####-###</string>
 </resources>

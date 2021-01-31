@@ -9,9 +9,6 @@ import com.bumptech.glide.Glide
 import com.pedrofr.wtest.R
 import java.text.Normalizer
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.regex.Pattern
 

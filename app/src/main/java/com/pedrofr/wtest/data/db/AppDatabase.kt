@@ -1,15 +1,11 @@
 package com.pedrofr.wtest.data.db
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.pedrofr.wtest.data.db.dao.ArticleDao
 import com.pedrofr.wtest.data.db.dao.PostcodeDao
@@ -20,7 +16,6 @@ import com.pedrofr.wtest.util.DATABASE_NAME
 import com.pedrofr.wtest.workers.ClearLocalStorageWorker
 import com.pedrofr.wtest.workers.DownloadPostcodeCsvWorker
 import com.pedrofr.wtest.workers.PostcodeDatabaseWorker
-import java.util.*
 
 /**
  * SQLite Database for storing the logs.

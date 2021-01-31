@@ -4,26 +4,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.pedrofr.wtest.R
 import com.pedrofr.wtest.databinding.FragmentFormBinding
-import com.pedrofr.wtest.util.*
-import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.YearMonth
-import java.time.ZonedDateTime
+import com.pedrofr.wtest.util.getDate
+import com.pedrofr.wtest.util.isDateFormatValid
+import com.pedrofr.wtest.util.isEmailValid
+import com.pedrofr.wtest.util.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.regex.Pattern
 
-
+@AndroidEntryPoint
 class FormFragment : Fragment(R.layout.fragment_form) {
 
     private val binding by viewBinding(FragmentFormBinding::bind)
+    private val formViewModel by viewModels<FormViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initUi()
-
+        initObservables()
     }
 
     //TODO change all this strings to resources to support internationalization
@@ -95,12 +97,7 @@ class FormFragment : Fragment(R.layout.fragment_form) {
 
         //TODO validate postcode
         binding.postcodeEditText.doOnTextChanged { text, _, _, _ ->
-            text ?: return@doOnTextChanged
-            if (text.toString().isValidOption()) {
-                binding.postcodeInputLayout.error = null
-            }else{
-                binding.postcodeInputLayout.error = getString(R.string.options_error)
-            }
+            formViewModel.fetchData(text.toString())
         }
 
     }
@@ -136,6 +133,18 @@ class FormFragment : Fragment(R.layout.fragment_form) {
 
         return !isMonday && !isFutureDate
 
+    }
+
+    private fun initObservables(){
+        //TODO see if i should leave this as it is
+        formViewModel.isPostcodeValid().observe(viewLifecycleOwner, androidx.lifecycle.Observer{ postalDesignation ->
+            if(postalDesignation.isNotEmpty()){
+                binding.postcodeInputLayout.error = null
+                binding.postcodeInputLayout.helperText = "Postcode from $postalDesignation"
+            }else{
+                binding.postcodeInputLayout.error = getString(R.string.postcode_error)
+            }
+        })
     }
 
 

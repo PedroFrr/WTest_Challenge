@@ -13,9 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.WorkManager
 import com.pedrofr.wtest.R
-import com.pedrofr.wtest.data.db.AppDatabase
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.FragmentPostCodeListBinding
 import com.pedrofr.wtest.util.gone
@@ -23,7 +21,6 @@ import com.pedrofr.wtest.util.toast
 import com.pedrofr.wtest.util.viewBinding
 import com.pedrofr.wtest.util.visible
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

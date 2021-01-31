@@ -1,8 +1,8 @@
 package com.pedrofr.wtest.di
 
+import com.pedrofr.wtest.data.RepositoryImpl
 import com.pedrofr.wtest.data.network.mapper.ApiMapper
 import com.pedrofr.wtest.data.network.mapper.ApiMapperImpl
-import com.pedrofr.wtest.data.RepositoryImpl
 import com.pedrofr.wtest.domain.repository.Repository
 import dagger.Binds
 import dagger.Module

@@ -20,4 +20,6 @@ interface Repository {
 
     suspend fun fetchData(): DbPostcode?
 
+    suspend fun fetchValidPostcode(postcodeNumber: String, postcodeExtension: String): DbPostcode?
+
 }

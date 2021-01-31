@@ -1,16 +1,13 @@
 package com.pedrofr.wtest.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.pedrofr.wtest.data.db.AppDatabase
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.util.removeNonSpacingMarks
-import kotlinx.coroutines.flow.asFlow
 import java.io.File
-import java.text.Normalizer
 
 class PostcodeDatabaseWorker(context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters) {
