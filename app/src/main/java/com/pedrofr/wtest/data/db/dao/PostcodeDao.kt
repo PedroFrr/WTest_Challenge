@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.pedrofr.wtest.data.db.entities.DbArticle
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import kotlinx.coroutines.flow.Flow
 
@@ -32,4 +33,8 @@ interface PostcodeDao {
 
     @Query("INSERT INTO postcodes_fts(postcodes_fts) VALUES ('rebuild')")
     fun rebuildDbPostcodesFTS()
+
+    //Fetches one single Article in order to validate if there's data on the database
+    @Query("SELECT * FROM postcode LIMIT 1")
+    suspend fun fetchData(): DbPostcode
 }

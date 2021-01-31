@@ -64,4 +64,7 @@ class PostcodeListViewModel @ViewModelInject constructor(
         val queryWithEscapedQuotes = query.replace(Regex.fromLiteral("\""), "\"\"")
         return queryWithEscapedQuotes
     }
+
+    suspend fun fetchData() = repository.fetchData()
+
 }

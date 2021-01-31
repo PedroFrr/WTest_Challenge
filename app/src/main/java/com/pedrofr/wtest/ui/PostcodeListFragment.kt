@@ -13,12 +13,17 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.WorkManager
 import com.pedrofr.wtest.R
+import com.pedrofr.wtest.data.db.AppDatabase
 import com.pedrofr.wtest.data.db.entities.DbPostcode
 import com.pedrofr.wtest.databinding.FragmentPostCodeListBinding
+import com.pedrofr.wtest.util.gone
 import com.pedrofr.wtest.util.toast
 import com.pedrofr.wtest.util.viewBinding
+import com.pedrofr.wtest.util.visible
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -46,7 +51,8 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
 
             postcodesAdapter.addLoadStateListener { loadState ->
                 // Only show the list if refresh succeeds.
-                binding.postcodeRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                binding.postcodeRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
                 // Show loading spinner during initial load or refresh.
                 binding.loadingProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
@@ -80,11 +86,19 @@ class PostcodeListFragment : Fragment(R.layout.fragment_post_code_list) {
     private fun initObservables() {
         //TODO see if I can change this to KTX (just have to declare the type)
         postcodeListViewModel.fetchPostcodes()
-            .observe(viewLifecycleOwner, Observer<PagingData<DbPostcode>> {
+            .observe(viewLifecycleOwner, Observer<PagingData<DbPostcode>> { pagingData ->
+
                 lifecycleScope.launch {
-                    postcodesAdapter.submitData(it)
+                    if(postcodeListViewModel.fetchData() != null){
+                        binding.loadingProgressBar.gone()
+                        postcodesAdapter.submitData(pagingData)
+                    }else{
+                        binding.loadingProgressBar.visible()
+                    }
                 }
+
             })
+
 
     }
 

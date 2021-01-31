@@ -18,4 +18,6 @@ interface Repository {
 
     fun fetchArticlesPaginated(): Flow<PagingData<DbArticle>>
 
+    suspend fun fetchData(): DbPostcode?
+
 }

@@ -22,9 +22,6 @@ interface ArticleDao {
     @Query("DELETE FROM article")
     suspend fun clearAll()
 
-    @Query("SELECT * FROM article ORDER BY publishedAt")
-    fun fetchArticles(): List<DbArticle>
-
     @Query("SELECT * FROM article WHERE id = :articleId")
     suspend fun fetchArticle(articleId: String): DbArticle
 
