@@ -28,6 +28,14 @@ The application is based on MVVM architecture and a repository pattern.
 
 ![architecture](https://raw.githubusercontent.com/fevziomurtekin/hackernewsapp/master/screenshot/mvvm.png)
 
+##How to change Build Variants (Feature 3 and Feature 5)
+<p align="left">
+<img src="/images/feature3.png" />
+</p>
+<p align="left">
+<img src="/images/feature5.png" />
+</p>
+
 ## Explanation of features
 Due to time constraints I assume the user has internet and enough storage on the device
 The application has two features which is done with ProductFlavor: 
