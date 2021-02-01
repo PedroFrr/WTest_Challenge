@@ -28,13 +28,14 @@ The application is based on MVVM architecture and a repository pattern.
 
 ![architecture](https://raw.githubusercontent.com/fevziomurtekin/hackernewsapp/master/screenshot/mvvm.png)
 
-##How to change Build Variants (Feature 3 and Feature 5)
-<p align="left">
-<img src="/images/feature3.png" />
+## How to change Build Variants (Feature 3 and Feature 5)
+Go into Android Studio (or other prefered IDE); left side; select Build Variants; select active Build Variant
+<p align="center">
+  <img alt="Feature3 Build Variant" src="/images/feature3.PNG" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Feature5 Build Variant" src="/images/feature5.PNG" width="45%">
 </p>
-<p align="left">
-<img src="/images/feature5.png" />
-</p>
+
 
 ## Explanation of features
 Due to time constraints I assume the user has internet and enough storage on the device
